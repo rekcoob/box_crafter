@@ -29,5 +29,7 @@ coverage
 
 *.tsbuildinfo
 
+# Added
 .env
+toDos.md
 
