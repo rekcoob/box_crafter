@@ -3,24 +3,7 @@ export default {
   data() {
     return {
       mat: 3,
-      thickn: 50,
-      options1: [
-        { text: 'neutralB', value: 30 },
-        { text: '1.03B', value: 28 },
-        { text: '1.31', value: 28 }
-      ],
-      options2: [
-        { text: 'neutralC', value: 40 },
-        { text: '1.03C', value: 38 },
-        { text: '1.41', value: 42 }
-      ],
-      options3: [
-        { text: 'neutral', value: 50 },
-        { text: '2.30', value: 55 },
-        { text: '2.51', value: 56 },
-        { text: '2.70', value: 58 },
-        { text: '2.90', value: 60 }
-      ]
+      thickn: 50
     }
   },
   methods: {
@@ -36,9 +19,6 @@ export default {
         this.thickn = 50
         this.$emit('thicknChanged', this.thickn)
       }
-    },
-    changeThickn() {
-      this.$emit('thicknChanged', this.thickn)
     }
   }
 }
@@ -54,24 +34,7 @@ export default {
         BC
       </button>
     </div>
-    <div class="quality">
-      <label for="quality">Quality: </label>
-      <select v-if="mat === 1" v-model="thickn" @change="changeThickn">
-        <option v-for="option1 in options1" :value="option1.value" :key="option1.id">
-          {{ option1.text }}
-        </option>
-      </select>
-      <select v-else-if="mat === 2" v-model="thickn" @change="changeThickn">
-        <option v-for="option2 in options2" :value="option2.value" :key="option2.id">
-          {{ option2.text }}
-        </option>
-      </select>
-      <select v-else v-model="thickn" @change="changeThickn">
-        <option v-for="option3 in options3" :value="option3.value" :key="option3.id">
-          {{ option3.text }}
-        </option>
-      </select>
-    </div>
+
     <p><b>thickness:</b> {{ thickn }}</p>
   </div>
 </template>

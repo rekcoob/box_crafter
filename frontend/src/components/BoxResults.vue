@@ -9,12 +9,12 @@ export default {
 <template>
   <div class="results">
     <h3>Results: BC- neutral</h3>
-    <p>L ={{ results.length }}</p>
-    <p>W = {{ results.width }}</p>
-    <p>L2 = {{ results.length2 }}</p>
-    <p>H = {{ results.height }}</p>
-    <p>K = {{ results.klopy }}</p>
-    <p>Format: {{ results.formatX }}x{{ results.formatY }}</p>
+    <p><strong>Outer Dimensions:</strong></p>
+    <p>Length ={{ results.length }}</p>
+    <p>Width = {{ results.width }}</p>
+    <p>Height = {{ results.width }}</p>
+
+    <p><strong>Format: </strong>{{ results.formatX }}x{{ results.formatY }}</p>
   </div>
 </template>
 

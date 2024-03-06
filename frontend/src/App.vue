@@ -34,7 +34,8 @@ export default {
         height: height + 5,
         klopy: width / 2 + 4, //BC
         formatX: (length + width) * 2 + 38, // +40=zalozka a -2 z length2
-        formatY: height + (width / 2 + 4) // zjednodusit?
+        formatY: height + (width / 2 + 4), // zjednodusit?
+        spary: 4
       }
     }
   },
@@ -61,8 +62,7 @@ export default {
       <!-- <DimensionsInput @input="length = $event.target.value" /> -->
       <DimensionsInput @inputsChanged="handleInputsChange" />
     </div>
-    <div class="">Download Button</div>
-    <DownloadBtn />
+    <DownloadBtn :results="resultDimensions" />
     <BoxResults :results="resultDimensions" />
     <BoxImage />
   </div>

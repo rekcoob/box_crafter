@@ -6,9 +6,7 @@ export default {
         length: null,
         width: null,
         height: null
-      },
-      // If true 1. btn=active, 2.=!active. If false 1.=not active, 2=active
-      inner: true
+      }
     }
   },
   methods: {
@@ -23,43 +21,23 @@ export default {
 
 <template>
   <div class="">
-    <h3>Dimensions</h3>
     <form>
       <div class="form-group">
         <!-- <button class="btn-primary btn-inner">Inner</button> -->
-        <button class="btn-primary" :class="{ active: inner }" @click.prevent="inner = true">
-          Inner
-        </button>
+        <h3>Inner Dimensions</h3>
         <input
-          v-model="inputs.length"
+          v-model.number="inputs.length"
           @input="emitInputs"
-          :disabled="!inner"
           type="text"
           placeholder="Length"
         />
+        <input v-model.number="inputs.width" @input="emitInputs" type="text" placeholder="Width" />
         <input
-          v-model="inputs.width"
+          v-model.number="inputs.height"
           @input="emitInputs"
-          :disabled="!inner"
-          type="text"
-          placeholder="Width"
-        />
-        <input
-          v-model="inputs.height"
-          @input="emitInputs"
-          :disabled="!inner"
           type="text"
           placeholder="Height"
         />
-      </div>
-      <div class="form-group">
-        <!-- <button class="btn-primary">Outer</button> -->
-        <button class="btn-primary" :class="{ active: !inner }" @click.prevent="inner = false">
-          Outer
-        </button>
-        <input type="text" placeholder="Length" :disabled="inner" />
-        <input type="text" placeholder="Width" :disabled="inner" />
-        <input type="text" placeholder="Height" :disabled="inner" />
       </div>
     </form>
   </div>
