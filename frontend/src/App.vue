@@ -1,42 +1,78 @@
 <script>
-import axios from 'axios'
+import MaterialButtons from './components/MaterialButtons.vue'
+import DimensionsInput from './components/DimensionsInput.vue'
+import BoxImage from './components/BoxImage.vue'
+import BoxResults from './components/BoxResults.vue'
+import DownloadBtn from './components/DownloadBtn.vue'
 
 export default {
+  name: 'App',
+  components: {
+    MaterialButtons,
+    DimensionsInput,
+    BoxImage,
+    BoxResults,
+    DownloadBtn
+  },
   data() {
     return {
-      items: []
+      inputs: {
+        length: null,
+        width: null,
+        height: null
+      },
+      thickn: 50
     }
   },
-  mounted() {
-    this.fetchData()
+  computed: {
+    resultDimensions() {
+      const { length, width, height } = this.inputs
+      return {
+        length: length + 5,
+        length2: length + 3,
+        width: width + 5,
+        height: height + 5,
+        klopy: width / 2 + 4, //BC
+        formatX: (length + width) * 2 + 38, // +40=zalozka a -2 z length2
+        formatY: height + (width / 2 + 4) // zjednodusit?
+      }
+    }
   },
   methods: {
-    async fetchData() {
-      try {
-        // const response = await axios.get('http://localhost:YOUR_NODE_SERVER_PORT/api/data')
-        const response = await axios.get('http://localhost:8888/')
-        this.items = response.data
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
+    handleInputsChange(inputs) {
+      console.log('Inputs: ', inputs)
+      this.inputs = inputs
+    },
+    handleThicknChange(th) {
+      this.thickn = th
+      // Now you can do whatever you want with the updated thickn value
+      console.log('Thickness changed to:', th)
     }
   }
 }
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <p>Yo</p>
-      <ul v-for="item in items" :key="item.id">
-        <li>{{ item.name }}</li>
-      </ul>
+  <h2>BigBox Crafter</h2>
+  <p>thickness : {{ thickn }}</p>
+  <div class="container">
+    <div class="input-section">
+      <MaterialButtons @thicknChanged="handleThicknChange" />
+      <!-- <DimensionsInput @input="length = $event.target.value" /> -->
+      <DimensionsInput @inputsChanged="handleInputsChange" />
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <div class="">Download Button</div>
+    <DownloadBtn />
+    <BoxResults :results="resultDimensions" />
+    <BoxImage />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.input-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid;
+}
+</style>
