@@ -3,20 +3,20 @@ export default {
   data() {
     return {
       mat: 3,
-      thickn: 50
+      thickn: 5
     }
   },
   methods: {
     switchActive(n) {
       this.mat = n
       if (n === 1) {
-        this.thickn = 30
+        this.thickn = 3
         this.$emit('thicknChanged', this.thickn)
       } else if (n === 2) {
-        this.thickn = 40
+        this.thickn = 4
         this.$emit('thicknChanged', this.thickn)
       } else {
-        this.thickn = 50
+        this.thickn = 5
         this.$emit('thicknChanged', this.thickn)
       }
     }
@@ -26,7 +26,7 @@ export default {
 
 <template>
   <div class="material">
-    <h3>Material</h3>
+    <h3>Materiál</h3>
     <div class="craft">
       <button class="btn-primary" :class="{ active: mat === 1 }" @click="switchActive(1)">B</button>
       <button class="btn-primary" :class="{ active: mat === 2 }" @click="switchActive(2)">C</button>
@@ -35,7 +35,7 @@ export default {
       </button>
     </div>
 
-    <p><b>thickness:</b> {{ thickn }}</p>
+    <p><b>Hrúbka:</b> {{ thickn }} mm</p>
   </div>
 </template>
 

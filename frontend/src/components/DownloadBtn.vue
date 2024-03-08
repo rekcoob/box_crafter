@@ -5,51 +5,50 @@ export default {
   props: {
     results: {
       length: Number,
-      length2: Number,
       width: Number,
-      height: Number,
-      klopy: Number, //BC
-      spary: Number, //BC
-      formatX: Number, // +40=zalozka a -2 z length2
-      formatY: Number
-    }
+      height: Number
+    },
+    thickn: Number
   },
   data() {
-    return {
-      // l: 805,
-      // l2: 603,
-      // w: 505,
-      // h: 405,
-      // k: 254,
-      // s: 4
-    }
+    return {}
   },
   methods: {
     async downloadFile() {
       try {
+        const thicknessMap = {
+          5: 'BC',
+          4: 'C',
+          3: 'B'
+        }
+        // let filename = `${this.results.length}x${this.results.width}x${this.results.height}_`
+        // filename += thicknessMap[this.thickn] || 'output'
+        // filename += '.dxf'
+        const filename = `${this.results.length}x${this.results.width}x${this.results.height}_${thicknessMap[this.thickn] || 'output'}.dxf`
+
         const response = await axios.post(
           'http://localhost:8888/dxf',
           {
             l: this.results.length,
-            l2: this.results.length2,
             w: this.results.width,
             h: this.results.height,
-            k: this.results.klopy,
-            s: this.results.spary
+            t: this.thickn
           },
           {
-            responseType: 'blob' // Important! This tells Axios to treat the response as a binary blob
+            // Important! This tells Axios to treat the response as a binary blob
+            responseType: 'blob'
           }
         )
-
         const url = window.URL.createObjectURL(new Blob([response.data]))
         const link = document.createElement('a')
         link.href = url
-        link.setAttribute('download', 'output.dxf') // Set the filename and extension of your file
+
+        // Set the filename and extension of your file
+        link.setAttribute('download', filename)
         document.body.appendChild(link)
         link.click()
-      } catch (error) {
-        console.error('Error downloading file:', error)
+      } catch (err) {
+        console.error('Error downloading file:', err)
       }
     }
   }
@@ -58,12 +57,6 @@ export default {
 
 <template>
   <button class="btn-primary" @click="downloadFile">Download</button>
-  <p>Length ={{ results.length }}</p>
-  <p>Length2 ={{ results.length2 }}</p>
-  <p>Width = {{ results.width }}</p>
-  <p>Height = {{ results.height }}</p>
-  <p>Klopy = {{ results.klopy }}</p>
-  <p>Spary = {{ results.spary }}</p>
 </template>
 
 <style scoped>

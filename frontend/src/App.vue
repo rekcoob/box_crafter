@@ -21,49 +21,30 @@ export default {
         width: null,
         height: null
       },
-      thickn: 50
-    }
-  },
-  computed: {
-    resultDimensions() {
-      const { length, width, height } = this.inputs
-      return {
-        length: length + 5,
-        length2: length + 3,
-        width: width + 5,
-        height: height + 5,
-        klopy: width / 2 + 4, //BC
-        formatX: (length + width) * 2 + 38, // +40=zalozka a -2 z length2
-        formatY: height + (width / 2 + 4), // zjednodusit?
-        spary: 4
-      }
+      thickn: 5
     }
   },
   methods: {
     handleInputsChange(inputs) {
-      console.log('Inputs: ', inputs)
       this.inputs = inputs
     },
-    handleThicknChange(th) {
-      this.thickn = th
-      // Now you can do whatever you want with the updated thickn value
-      console.log('Thickness changed to:', th)
+    handleThicknChange(t) {
+      this.thickn = t
     }
   }
 }
 </script>
 
 <template>
-  <h2>BigBox Crafter</h2>
-  <p>thickness : {{ thickn }}</p>
+  <h2>BigBox Crafter ♥</h2>
   <div class="container">
     <div class="input-section">
-      <MaterialButtons @thicknChanged="handleThicknChange" />
       <!-- <DimensionsInput @input="length = $event.target.value" /> -->
       <DimensionsInput @inputsChanged="handleInputsChange" />
+      <MaterialButtons @thicknChanged="handleThicknChange" />
     </div>
-    <DownloadBtn :results="resultDimensions" />
-    <BoxResults :results="resultDimensions" />
+    <DownloadBtn :results="inputs" :thickn="thickn" />
+    <BoxResults :results="inputs" :thickn="thickn" />
     <BoxImage />
   </div>
 </template>

@@ -1,61 +1,66 @@
 const Drawing = require('dxf-writer')
 
-function generateDxf(l, l2, w, h, k, s) {
+function generateDxf(l, w, h, t) {
+  // Nadmiera dlzky = Dlzka + hrubka materialu
+  const lt = l + t
+  const lt2 = l + t - 2
+  // Nadmiera sirky = Sirka + hrubka materialu
+  const wt = w + t
+  // Vyska klopy
+  const k = t === 5 ? w / 2 + 4 : w / 2
+  // Nadmiera vysky = Vyska + hrubka materialu * 2
+  const htk = h + t * 2 + k
+  const htk2 = h + t + k * 2
+  // Spary
+  const s = 4
+
   let d = new Drawing()
 
   // Draw lines based on input
   // Cut Layer
-  d.drawLine(0, h + k * 2, 0, 0) // 1vertical-full
-    // Horizontal Lower
-    .drawLine(0, 0, l2 - s, 0) // horizontal-lower-1
-    .drawLine(l2 + s, 0, l2 + w - s, 0) // horizontal-lower-2
-    .drawLine(l2 + w + s, 0, l + l2 + w - s, 0) // horizontal-lower-3
-    .drawLine(l + l2 + w + s, 0, l + l2 + w * 2, 0) // horizontal-lower-4
-    // Horizontal Upper
-    .drawLine(0, h + k * 2, l2 - s, h + k * 2) // horizontal-lower-1
-    .drawLine(l2 + s, h + k * 2, l2 + w - s, h + k * 2) // horizontal-lower-2
-    .drawLine(l2 + w + s, h + k * 2, l + l2 + w - s, h + k * 2) // horizontal-lower-3
-    .drawLine(l + l2 + w + s, h + k * 2, l + l2 + w * 2, h + k * 2) // horizontal-lower-4
-    // Klopy Vyseky Horizontal Lower
-    .drawLine(l2 - s, 0, l2 - s, k) // klopy-lower-1
-    .drawLine(l2 + s, 0, l2 + s, k) // klopy-lower-2
-    .drawLine(l2 + w - s, 0, l2 + w - s, k) // klopy-lower-3
-    .drawLine(l2 + w + s, 0, l2 + w + s, k) // klopy-lower-4
-    .drawLine(l + l2 + w - s, 0, l + l2 + w - s, k) // klopy-lower-5
-    .drawLine(l + l2 + w + s, 0, l + l2 + w + s, k) // klopy-lower-5
-    .drawLine(l + l2 + w * 2, 0, l + l2 + w * 2, k) // klopy-lower-6
-    // Klopy Vyseky Horizontal Upper
-    .drawLine(l2 - s, h + k, l2 - s, h + k * 2) // klopy-Upper-1
-    .drawLine(l2 + s, h + k, l2 + s, h + k * 2) // klopy-Upper-2
-    .drawLine(l2 + w - s, h + k, l2 + w - s, h + k * 2) // klopy-Upper-3
-    .drawLine(l2 + w + s, h + k, l2 + w + s, h + k * 2) // klopy-Upper-4
-    .drawLine(l + l2 + w - s, h + k, l + l2 + w - s, h + k * 2) // klopy-Upper-5
-    .drawLine(l + l2 + w + s, h + k, l + l2 + w + s, h + k * 2) // klopy-Upper-5
-    .drawLine(l + l2 + w * 2, h + k, l + l2 + w * 2, h + k * 2) // klopy-Upper-6
-    // Spary Vyseky Vertical Lower
-    .drawLine(l2 - s, k, l2 + s, k) // Spary-lower-1
-    .drawLine(l2 + w - s, k, l2 + w + s, k) // Spary-lower-2
-    .drawLine(l + l2 + w - s, k, l + l2 + w + s, k) // Spary-lower-3
-    // Spary Vyseky Vertical Upper
-    .drawLine(l2 - s, h + k, l2 + s, h + k) // Spary-Upper-1
-    .drawLine(l2 + w - s, h + k, l2 + w + s, h + k) // Spary-Upper-2
-    .drawLine(l + l2 + w - s, h + k, l + l2 + w + s, h + k) // Spary-Upper-3
-    // Zalozka Sikmina Lower
-    .drawLine(l + l2 + w * 2, k, l + l2 + w * 2 + 40, k + 6)
-    // Zalozka Sikmina Upper
-    .drawLine(l + l2 + w * 2, h + k, l + l2 + w * 2 + 40, h + k - 6)
-    // Zalozka Horizontal line
-    .drawLine(l + l2 + w * 2 + 40, k + 6, l + l2 + w * 2 + 40, h + k - 6) // klopy-Upper-6
+  d.drawLine(0, htk2, 0, 0)
+    .drawLine(0, 0, lt2 - s, 0)
+    .drawLine(lt2 + s, 0, lt2 + wt - s, 0)
+    .drawLine(lt2 + wt + s, 0, lt + lt2 + wt - s, 0)
+    .drawLine(lt + lt2 + wt + s, 0, lt + lt2 + wt * 2, 0)
+    .drawLine(0, htk2, lt2 - s, htk2)
+    .drawLine(lt2 + s, htk2, lt2 + wt - s, htk2)
+    .drawLine(lt2 + wt + s, htk2, lt + lt2 + wt - s, htk2)
+    .drawLine(lt + lt2 + wt + s, htk2, lt + lt2 + wt * 2, htk2)
+    .drawLine(lt2 - s, 0, lt2 - s, k)
+    .drawLine(lt2 + s, 0, lt2 + s, k)
+    .drawLine(lt2 + wt - s, 0, lt2 + wt - s, k)
+    .drawLine(lt2 + wt + s, 0, lt2 + wt + s, k)
+    .drawLine(lt + lt2 + wt - s, 0, lt + lt2 + wt - s, k)
+    .drawLine(lt + lt2 + wt + s, 0, lt + lt2 + wt + s, k)
+    .drawLine(lt + lt2 + wt * 2, 0, lt + lt2 + wt * 2, k)
+    .drawLine(lt2 - s, htk, lt2 - s, htk2)
+    .drawLine(lt2 + s, htk, lt2 + s, htk2)
+    .drawLine(lt2 + wt - s, htk, lt2 + wt - s, htk2)
+    .drawLine(lt2 + wt + s, htk, lt2 + wt + s, htk2)
+    .drawLine(lt + lt2 + wt - s, htk, lt + lt2 + wt - s, htk2)
+    .drawLine(lt + lt2 + wt + s, htk, lt + lt2 + wt + s, htk2)
+    .drawLine(lt + lt2 + wt * 2, htk, lt + lt2 + wt * 2, htk2)
+    .drawLine(lt2 - s, k, lt2 + s, k)
+    .drawLine(lt2 + wt - s, k, lt2 + wt + s, k)
+    .drawLine(lt + lt2 + wt - s, k, lt + lt2 + wt + s, k)
+    .drawLine(lt2 - s, htk, lt2 + s, htk)
+    .drawLine(lt2 + wt - s, htk, lt2 + wt + s, htk)
+    .drawLine(lt + lt2 + wt - s, htk, lt + lt2 + wt + s, htk)
+    .drawLine(lt + lt2 + wt * 2, k, lt + lt2 + wt * 2 + 40, k + 6)
+    .drawLine(lt + lt2 + wt * 2, htk, lt + lt2 + wt * 2 + 40, htk - 6)
+    .drawLine(lt + lt2 + wt * 2 + 40, k + 6, lt + lt2 + wt * 2 + 40, htk - 6)
 
-  // Crease Layer
+  // Crease layer
   d.addLayer('Crease', Drawing.ACI.RED, 'CONTINUOUS')
     .setActiveLayer('Crease')
-    .drawLine(0, k, l + l2 + w * 2, k) // vertical-lower-full
-    .drawLine(0, h + k, l + l2 + w * 2, h + k) // vertical-upper-full
-    .drawLine(l2, k, l2, h + k) // horizontal-1
-    .drawLine(l2 + w, k, l2 + w, h + k) // horizontal-2
-    .drawLine(l + l2 + w, k, l + l2 + w, h + k) // horizontal-3
-    .drawLine(l + l2 + w * 2, k, l + l2 + w * 2, h + k) // horizontal-4
+    .drawLine(0, k, lt + lt2 + wt * 2, k)
+    .drawLine(0, htk, lt + lt2 + wt * 2, htk)
+    .drawLine(lt2, k, lt2, htk)
+    .drawLine(lt2 + wt, k, lt2 + wt, htk)
+    .drawLine(lt + lt2 + wt, k, lt + lt2 + wt, htk)
+    .drawLine(lt + lt2 + wt * 2, k, lt + lt2 + wt * 2, htk)
+
   return d.toDxfString()
 }
 

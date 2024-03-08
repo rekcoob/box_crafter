@@ -11,8 +11,7 @@ export default {
   },
   methods: {
     emitInputs() {
-      console.log()
-      //  emit object | 1. argument = method name, 2. = payload
+      // Emit object | 1.argument = method name, 2.arg = payload
       this.$emit('inputsChanged', this.inputs)
     }
   }
@@ -24,19 +23,25 @@ export default {
     <form>
       <div class="form-group">
         <!-- <button class="btn-primary btn-inner">Inner</button> -->
-        <h3>Inner Dimensions</h3>
+        <!-- <h3>Inner Dimensions</h3> -->
+        <h3>Vnútorné rozmery krabice</h3>
         <input
           v-model.number="inputs.length"
           @input="emitInputs"
-          type="text"
-          placeholder="Length"
+          type="number"
+          placeholder="Dĺžka"
         />
-        <input v-model.number="inputs.width" @input="emitInputs" type="text" placeholder="Width" />
+        <input
+          v-model.number="inputs.width"
+          @input="emitInputs"
+          type="number"
+          placeholder="Šírka"
+        />
         <input
           v-model.number="inputs.height"
           @input="emitInputs"
-          type="text"
-          placeholder="Height"
+          type="number"
+          placeholder="Výška"
         />
       </div>
     </form>
@@ -62,7 +67,7 @@ form {
   margin: 15px;
 }
 
-input[type='text'] {
+input[type='number'] {
   background-color: #181a1b;
   color: #e8e6e3;
   width: 100%;
@@ -75,17 +80,29 @@ input[type='text'] {
   border-radius: 0.25rem;
   /* outline: none; */
 }
-input[type='text']:focus {
+input[type='number']:focus {
   border: 1px solid #0062cc;
   box-shadow: 0 0 20px #0062cc;
 }
-input[type='text']:disabled {
+input[type='number']:disabled {
   border: 1px solid grey;
   opacity: 0.5;
 
   cursor: not-allowed;
 }
 
+/* Hide the spin box for number input */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  /* Firefox */
+  -moz-appearance: textfield;
+  /* Chrome, Safari, Edge */
+  appearance: textfield;
+}
 button {
   display: inline-block;
   margin: 10px 0;
