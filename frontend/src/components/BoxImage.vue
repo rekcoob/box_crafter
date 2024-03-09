@@ -1,7 +1,15 @@
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      show: false
+    }
+  }
+}
+</script>
 
 <template>
-  <div class="box-image">
+  <div v-if="show" class="box-image">
     <img :src="image" alt="image" />
   </div>
 </template>

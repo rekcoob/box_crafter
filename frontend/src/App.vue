@@ -40,7 +40,6 @@ export default {
 <template>
   <h2>BigBox Crafter ♥</h2>
   <div class="container">
-    form valid {{ formValid }}
     <div class="input-section">
       <!-- <DimensionsInput @input="length = $event.target.value" /> -->
       <DimensionsInput
@@ -50,7 +49,7 @@ export default {
       <MaterialButtons @thicknChanged="handleThicknChange" />
     </div>
     <DownloadBtn :results="inputs" :thickn="thickn" :formValid="formValid" />
-    <BoxResults :results="inputs" :thickn="thickn" />
+    <BoxResults :results="inputs" :thickn="thickn" :formValid="formValid" />
     <BoxImage />
   </div>
 </template>

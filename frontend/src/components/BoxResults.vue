@@ -1,12 +1,18 @@
 <script>
 export default {
+  data() {
+    return {
+      showResults: false
+    }
+  },
   props: {
     results: {
       length: Number,
       width: Number,
       height: Number
     },
-    thickn: Number
+    thickn: Number,
+    formValid: Boolean
   },
   methods: {
     calculateFormat() {
@@ -32,20 +38,24 @@ export default {
 </script>
 
 <template>
-  <div class="results">
-    <h3>Results: {{ getMat() }}</h3>
-    <p><strong>Vonkajšie rozmery krabice:</strong></p>
-    <p>Dĺžka ={{ results.length + thickn * 2 }}</p>
-    <p>Šírka = {{ results.width + thickn * 2 }}</p>
-    <p>Výška = {{ results.height + thickn * 4 }}</p>
-    <!-- +40=zalozka a -2 z length2 -->
-    <p><strong>Formát: </strong>{{ calculateFormat() }}</p>
+  <div class="">
+    <div class="results" :style="{ opacity: formValid ? 1 : 0 }">
+      <!-- <div :class="{ results: true, show: formValid }"> -->
+      <h3>Results: {{ getMat() }}</h3>
+      <p><strong>Vonkajšie rozmery krabice:</strong></p>
+      <p>Dĺžka ={{ results.length + thickn * 2 }}</p>
+      <p>Šírka = {{ results.width + thickn * 2 }}</p>
+      <p>Výška = {{ results.height + thickn * 4 }}</p>
+      <!-- +40=zalozka a -2 z length2 -->
+      <p><strong>Formát: </strong>{{ calculateFormat() }}</p>
+    </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 .results {
   padding: 50px;
   border: solid;
+  transition: opacity 1.5s ease-in-out;
 }
 </style>
