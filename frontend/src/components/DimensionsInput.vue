@@ -6,13 +6,19 @@ export default {
         length: null,
         width: null,
         height: null
-      }
+      },
+      formValid: false
     }
   },
   methods: {
     emitInputs() {
+      // Set formValid to True when all 3 inputs are filled
+      this.formValid =
+        this.inputs.length !== null && this.inputs.width !== null && this.inputs.height !== null
+
       // Emit object | 1.argument = method name, 2.arg = payload
-      this.$emit('inputsChanged', this.inputs)
+      // this.$emit('inputsChanged',  inputs: this.inputs)
+      this.$emit('inputsChanged', { inputs: this.inputs, formValid: this.formValid })
     }
   }
 }
@@ -22,26 +28,27 @@ export default {
   <div class="">
     <form>
       <div class="form-group">
-        <!-- <button class="btn-primary btn-inner">Inner</button> -->
-        <!-- <h3>Inner Dimensions</h3> -->
         <h3>Vnútorné rozmery krabice</h3>
         <input
           v-model.number="inputs.length"
           @input="emitInputs"
           type="number"
           placeholder="Dĺžka"
+          required
         />
         <input
           v-model.number="inputs.width"
           @input="emitInputs"
           type="number"
           placeholder="Šírka"
+          required
         />
         <input
           v-model.number="inputs.height"
           @input="emitInputs"
           type="number"
           placeholder="Výška"
+          required
         />
       </div>
     </form>
@@ -124,7 +131,6 @@ button {
   border-color: #0056b3;
   box-shadow: 0 0 10px #0062cc;
 }
-
 .active {
   background-color: #0056b3;
   color: #fff;

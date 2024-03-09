@@ -21,12 +21,14 @@ export default {
         width: null,
         height: null
       },
-      thickn: 5
+      thickn: 5,
+      formValid: false
     }
   },
   methods: {
-    handleInputsChange(inputs) {
-      this.inputs = inputs
+    handleInputsChange(data) {
+      this.inputs = data.inputs
+      this.formValid = data.formValid
     },
     handleThicknChange(t) {
       this.thickn = t
@@ -38,12 +40,16 @@ export default {
 <template>
   <h2>BigBox Crafter ♥</h2>
   <div class="container">
+    form valid {{ formValid }}
     <div class="input-section">
       <!-- <DimensionsInput @input="length = $event.target.value" /> -->
-      <DimensionsInput @inputsChanged="handleInputsChange" />
+      <DimensionsInput
+        @inputsChanged="handleInputsChange"
+        @form-validity-changed="updateButtonColor"
+      />
       <MaterialButtons @thicknChanged="handleThicknChange" />
     </div>
-    <DownloadBtn :results="inputs" :thickn="thickn" />
+    <DownloadBtn :results="inputs" :thickn="thickn" :formValid="formValid" />
     <BoxResults :results="inputs" :thickn="thickn" />
     <BoxImage />
   </div>

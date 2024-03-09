@@ -8,14 +8,22 @@ export default {
       width: Number,
       height: Number
     },
-    thickn: Number
+    thickn: Number,
+    formValid: Boolean
   },
   data() {
-    return {}
+    return {
+      errorMessage: ''
+    }
   },
   methods: {
     async downloadFile() {
       try {
+        if (!this.formValid) {
+          // If form is not valid, display error message and return
+          this.errorMessage = 'Vyplňte vsetky rozmery!'
+          return
+        }
         const thicknessMap = {
           5: 'BC',
           4: 'C',
@@ -56,7 +64,14 @@ export default {
 </script>
 
 <template>
-  <button class="btn-primary" @click="downloadFile">Download</button>
+  <div class="container">
+    <!-- Error message -->
+    <p v-show="!formValid" class="error-message">{{ errorMessage }}</p>
+
+    <button class="btn-primary" :class="{ ready: formValid }" @click="downloadFile">
+      Download
+    </button>
+  </div>
 </template>
 
 <style scoped>
@@ -80,5 +95,24 @@ button {
 .btn-primary:hover {
   border-color: #0056b3;
   box-shadow: 0 0 10px #0062cc;
+  opacity: 0.85;
+}
+.ready {
+  color: #fff;
+  border-color: #0056b3;
+  background-color: #0056b3;
+  box-shadow: 0 0 10px #0062cc;
+}
+
+.container {
+  position: relative;
+}
+.error-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Adjust this value to position the error message appropriately */
+  margin-top: -20px;
+  color: red;
 }
 </style>
