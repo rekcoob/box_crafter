@@ -95,13 +95,11 @@ button {
 .btn-primary:hover {
   border-color: #0056b3;
   box-shadow: 0 0 10px #0062cc;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 .ready {
-  color: #fff;
-  border-color: #0056b3;
   background-color: #0056b3;
-  box-shadow: 0 0 10px #0062cc;
+  color: #fff;
 }
 
 .container {

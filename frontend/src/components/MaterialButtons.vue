@@ -70,6 +70,7 @@ button {
 .btn-primary:hover {
   border-color: #0056b3;
   box-shadow: 0 0 10px #0062cc;
+  opacity: 0.9;
 }
 
 .active {

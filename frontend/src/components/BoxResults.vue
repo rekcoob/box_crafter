@@ -40,12 +40,13 @@ export default {
 <template>
   <div class="">
     <div class="results" :style="{ opacity: formValid ? 1 : 0 }">
-      <!-- <div :class="{ results: true, show: formValid }"> -->
-      <h3>Results: {{ getMat() }}</h3>
-      <p><strong>Vonkajšie rozmery krabice:</strong></p>
-      <p>Dĺžka ={{ results.length + thickn * 2 }}</p>
-      <p>Šírka = {{ results.width + thickn * 2 }}</p>
-      <p>Výška = {{ results.height + thickn * 4 }}</p>
+      <!-- <h3>{{ getMat() }}</h3> -->
+      <p>
+        <strong>Vonkajšie rozmery krabice {{ getMat() }}</strong>
+      </p>
+      <p>Dĺžka: {{ results.length + thickn * 2 }}</p>
+      <p>Šírka: {{ results.width + thickn * 2 }}</p>
+      <p>Výška: {{ results.height + thickn * 4 }}</p>
       <!-- +40=zalozka a -2 z length2 -->
       <p><strong>Formát: </strong>{{ calculateFormat() }}</p>
     </div>
