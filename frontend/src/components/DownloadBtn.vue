@@ -35,7 +35,10 @@ export default {
         const filename = `${this.results.length}x${this.results.width}x${this.results.height}_${thicknessMap[this.thickn] || 'output'}.dxf`
 
         const response = await axios.post(
-          'http://localhost:8888/dxf',
+          // localhost
+          // 'http://localhost:8888/dxf',
+          // deploy
+          '/dxf',
           {
             l: this.results.length,
             w: this.results.width,
