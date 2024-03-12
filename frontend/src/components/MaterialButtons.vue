@@ -43,7 +43,7 @@ export default {
 .material {
   margin: 50px;
   padding: 50px;
-  border: solid;
+  /* border: solid; */
   display: flex;
   flex-direction: column;
   align-items: center;

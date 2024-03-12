@@ -56,7 +56,7 @@ export default {
 <style scoped>
 .results {
   padding: 50px;
-  border: solid;
-  transition: opacity 1.5s ease-in-out;
+  /* border: solid; */
+  transition: opacity 2s ease-in-out;
 }
 </style>

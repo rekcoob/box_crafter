@@ -21,7 +21,7 @@ export default {
       try {
         if (!this.formValid) {
           // If form is not valid, display error message and return
-          this.errorMessage = 'Vyplňte vsetky rozmery!'
+          this.errorMessage = 'Ferenc, Vyplň vsetky rozmery!'
           return
         }
         const thicknessMap = {
@@ -72,7 +72,7 @@ export default {
     <p v-show="!formValid" class="error-message">{{ errorMessage }}</p>
 
     <button class="btn-primary" :class="{ ready: formValid }" @click="downloadFile">
-      Download
+      Stiahnuť
     </button>
   </div>
 </template>
