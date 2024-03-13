@@ -29,15 +29,18 @@ export default {
           4: 'C',
           3: 'B'
         }
+
+        // Define your API endpoint based on the environment
+
         // let filename = `${this.results.length}x${this.results.width}x${this.results.height}_`
         // filename += thicknessMap[this.thickn] || 'output'
         // filename += '.dxf'
         const filename = `${this.results.length}x${this.results.width}x${this.results.height}_${thicknessMap[this.thickn] || 'output'}.dxf`
 
         const response = await axios.post(
-          // localhost
-          // 'http://localhost:8888/dxf',
-          // deploy
+          // // localhost
+          // 'http://localhost:5000/dxf',
+          // // deploy
           '/dxf',
           {
             l: this.results.length,

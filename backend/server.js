@@ -7,7 +7,8 @@ const cors = require('cors')
 require('dotenv').config()
 
 // Custom Modules
-const { generateDxf } = require('./drawline')
+const { generateBox } = require('./box.js')
+const { generateHalf } = require('./half.js')
 
 // Constants and Configuration
 const port = process.env.PORT || 5000
@@ -30,18 +31,31 @@ app.get('/', (req, res) => {
   res.json(data)
 })
 
-// POST /dxf
+// POST /dxf Generate Regular Slotted Box
 app.post('/dxf', (req, res) => {
   const { l, w, h, t } = req.body
 
   // Generate DXF
-  const dxfString = generateDxf(l, w, h, t)
+  const dxfString = generateBox(l, w, h, t)
 
   // For simplicity, you can just send the file content as a response
   // In a real-world scenario, you might save the file and send its URL
   // res.send({ fileContent: dxfString })
   res.send(dxfString)
 })
+
+// // POST /dxf
+// app.post('/dxf', (req, res) => {
+//   const { l, w, h, t } = req.body
+
+//   // Generate DXF
+//   const dxfString = generateHalf(l, w, h, t)
+
+//   // For simplicity, you can just send the file content as a response
+//   // In a real-world scenario, you might save the file and send its URL
+//   // res.send({ fileContent: dxfString })
+//   res.send(dxfString)
+// })
 
 app.listen(port, () => {
   console.log(`Server running  on port ${port}`)
