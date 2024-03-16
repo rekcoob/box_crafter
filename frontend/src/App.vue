@@ -1,16 +1,16 @@
 <script>
-import MaterialButtons from './components/MaterialButtons.vue'
-import DimensionsInput from './components/DimensionsInput.vue'
-import BoxImage from './components/BoxImage.vue'
-import BoxResults from './components/BoxResults.vue'
-import DownloadBtn from './components/DownloadBtn.vue'
+import MaterialButtons from '@/components/MaterialButtons.vue'
+import DimensionsInput from '@/components/DimensionsInput.vue'
+import BoxStyles from '@/components/BoxStyles.vue'
+import BoxResults from '@/components/BoxResults.vue'
+import DownloadBtn from '@/components/DownloadBtn.vue'
 
 export default {
   name: 'App',
   components: {
     MaterialButtons,
     DimensionsInput,
-    BoxImage,
+    BoxStyles,
     BoxResults,
     DownloadBtn
   },
@@ -22,6 +22,7 @@ export default {
         height: null
       },
       thickn: 5,
+      boxStyle: '0200',
       formValid: false
     }
   },
@@ -32,6 +33,9 @@ export default {
     },
     handleThicknChange(t) {
       this.thickn = t
+    },
+    updateSelectedOption(option) {
+      this.boxStyle = option
     }
   }
 }
@@ -39,14 +43,19 @@ export default {
 
 <template>
   <h2>BigBox Crafter ♥</h2>
+
   <div class="container">
-    <div class="input-section">
-      <!-- <DimensionsInput @input="length = $event.target.value" /> -->
-      <DimensionsInput
-        @inputsChanged="handleInputsChange"
-        @form-validity-changed="updateButtonColor"
-      />
-      <MaterialButtons @thicknChanged="handleThicknChange" />
+    <p>dick {{ boxStyle }}</p>
+    <div class="inputs">
+      <div class="input-section">
+        <!-- <DimensionsInput @input="length = $event.target.value" /> -->
+        <MaterialButtons @thicknChanged="handleThicknChange" />
+        <DimensionsInput
+          @inputsChanged="handleInputsChange"
+          @form-validity-changed="updateButtonColor"
+        />
+      </div>
+      <BoxStyles @optionSelected="updateSelectedOption" />
     </div>
     <DownloadBtn :results="inputs" :thickn="thickn" :formValid="formValid" />
     <BoxResults :results="inputs" :thickn="thickn" :formValid="formValid" />
@@ -57,8 +66,11 @@ export default {
 <style scoped>
 .input-section {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  /* justify-content: center; */
   /*border: solid;*/
+}
+.inputs {
+  display: flex;
 }
 </style>

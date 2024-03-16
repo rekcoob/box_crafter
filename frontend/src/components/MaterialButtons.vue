@@ -34,22 +34,20 @@ export default {
         BC
       </button>
     </div>
-
     <p><b>Hrúbka:</b> {{ thickn }} mm</p>
   </div>
 </template>
 
 <style scoped>
 .material {
-  margin: 50px;
-  padding: 50px;
+  /* margin: 50px;
+  padding: 50px; */
   /* border: solid; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-
 button {
   /* display: inline-block; */
   margin: 10px 0;
@@ -72,7 +70,6 @@ button {
   box-shadow: 0 0 10px #0062cc;
   opacity: 0.9;
 }
-
 .active {
   background-color: #0056b3;
   color: #fff;

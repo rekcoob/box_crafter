@@ -58,8 +58,8 @@ export default {
 <style scoped>
 /* https://blog.logrocket.com/style-forms-css/ */
 form {
-  margin: 50px;
-  padding: 50px;
+  /* margin: 50px;
+  padding: 50px; */
   /* border: solid; */
   display: flex;
   flex-direction: row;

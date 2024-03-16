@@ -39,9 +39,9 @@ export default {
 
         const response = await axios.post(
           // // localhost
-          // 'http://localhost:5000/dxf',
+          'http://localhost:5000/dxf',
           // // deploy
-          '/dxf',
+          // '/dxf',
           {
             l: this.results.length,
             w: this.results.width,
