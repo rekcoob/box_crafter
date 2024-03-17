@@ -9,6 +9,7 @@ export default {
       height: Number
     },
     thickn: Number,
+    boxStyle: String,
     formValid: Boolean
   },
   data() {
@@ -37,9 +38,13 @@ export default {
         // filename += '.dxf'
         const filename = `${this.results.length}x${this.results.width}x${this.results.height}_${thicknessMap[this.thickn] || 'output'}.dxf`
 
+        const apiUrl = `http://localhost:5000/dxf/${this.boxStyle}`
+
         const response = await axios.post(
+          apiUrl,
           // // localhost
-          'http://localhost:5000/dxf',
+          // 'http://localhost:5000/dxf/`this.apiUrl',
+          // `http://localhost:5000/dxf/${this.boxStyle}`,
           // // deploy
           // '/dxf',
           {
@@ -71,6 +76,7 @@ export default {
 
 <template>
   <div class="container">
+    boxstyle {{ this.boxStyle }}
     <!-- Error message -->
     <p v-show="!formValid" class="error-message">{{ errorMessage }}</p>
 

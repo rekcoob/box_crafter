@@ -22,7 +22,7 @@ export default {
         height: null
       },
       thickn: 5,
-      boxStyle: '0200',
+      boxStyle: 'box',
       formValid: false
     }
   },
@@ -45,7 +45,7 @@ export default {
   <h2>BigBox Crafter ♥</h2>
 
   <div class="container">
-    <p>dick {{ boxStyle }}</p>
+    <!-- <p>BoxStyle {{ boxStyle }}</p> -->
     <div class="inputs">
       <div class="input-section">
         <!-- <DimensionsInput @input="length = $event.target.value" /> -->
@@ -57,7 +57,7 @@ export default {
       </div>
       <BoxStyles @optionSelected="updateSelectedOption" />
     </div>
-    <DownloadBtn :results="inputs" :thickn="thickn" :formValid="formValid" />
+    <DownloadBtn :results="inputs" :thickn="thickn" :boxStyle="boxStyle" :formValid="formValid" />
     <BoxResults :results="inputs" :thickn="thickn" :formValid="formValid" />
     <BoxImage />
   </div>

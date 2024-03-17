@@ -1,6 +1,6 @@
 const Drawing = require('dxf-writer')
 
-function generateHalfClosed(l, w, h, t) {
+function generateHalf(l, w, h, t) {
   // Nadmiera dlzky = Dlzka + hrubka materialu
   const lt = l + t
   const lt2 = l + t - 2
@@ -55,4 +55,4 @@ function generateHalfClosed(l, w, h, t) {
   return d.toDxfString()
 }
 
-module.exports = { generateHalfClosed }
+module.exports = { generateHalf }

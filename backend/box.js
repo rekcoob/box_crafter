@@ -1,6 +1,6 @@
 const Drawing = require('dxf-writer')
 
-function generateBoxClosed(l, w, h, t) {
+function generateBox(l, w, h, t) {
   // Nadmiera dlzky = Dlzka + hrubka materialu
   const lt = l + t
   const lt2 = l + t - 2
@@ -73,4 +73,4 @@ function generateBoxClosed(l, w, h, t) {
   return d.toDxfString()
 }
 
-module.exports = { generateBoxClosed }
+module.exports = { generateBox }

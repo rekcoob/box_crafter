@@ -7,9 +7,9 @@ const cors = require('cors')
 require('dotenv').config()
 
 // Custom Modules
-const { generateBoxClosed } = require('./box_closed.js')
+const { generateBox } = require('./box.js')
 const { generateBoxOpen } = require('./box_open.js')
-const { generateHalfClosed } = require('./half_closed.js')
+const { generateHalf } = require('./half.js')
 const { generateHalfOpen } = require('./half_open.js')
 
 // Constants and Configuration
@@ -33,57 +33,48 @@ app.get('/', (req, res) => {
   res.json(data)
 })
 
-// // POST /dxf Generate Regular Slotted Box
-// app.post('/dxf', (req, res) => {
-//   const { l, w, h, t } = req.body
-
-//   // Generate DXF
-//   const dxfString = generateBoxClosed(l, w, h, t)
-
-//   // For simplicity, you can just send the file content as a response
-//   // In a real-world scenario, you might save the file and send its URL
-//   // res.send({ fileContent: dxfString })
-//   res.send(dxfString)
-// })
-
-// // POST /dxf Generate Regular Slotted Box
-// app.post('/dxf', (req, res) => {
-//   const { l, w, h, t } = req.body
-
-//   // Generate DXF
-//   const dxfString = generateHalfOpen(l, w, h, t)
-
-//   // For simplicity, you can just send the file content as a response
-//   // In a real-world scenario, you might save the file and send its URL
-//   // res.send({ fileContent: dxfString })
-//   res.send(dxfString)
-// })
-
 // POST /dxf Generate Regular Slotted Box
 app.post('/dxf', (req, res) => {
   const { l, w, h, t } = req.body
-
   // Generate DXF
   const dxfString = generateBoxOpen(l, w, h, t)
-
   // For simplicity, you can just send the file content as a response
   // In a real-world scenario, you might save the file and send its URL
   // res.send({ fileContent: dxfString })
   res.send(dxfString)
 })
 
-// // POST /dxf
-// app.post('/dxf', (req, res) => {
-//   const { l, w, h, t } = req.body
+// Generate Regular Slotted Box
+app.post('/dxf/box', (req, res) => {
+  const { l, w, h, t } = req.body
+  // Generate DXF
+  const dxfString = generateBox(l, w, h, t)
+  res.send(dxfString)
+})
 
-//   // Generate DXF
-//   const dxfString = generateHalf(l, w, h, t)
+// Generate Open Box
+app.post('/dxf/box-open', (req, res) => {
+  const { l, w, h, t } = req.body
+  // Generate DXF
+  const dxfString = generateBoxOpen(l, w, h, t)
+  res.send(dxfString)
+})
 
-//   // For simplicity, you can just send the file content as a response
-//   // In a real-world scenario, you might save the file and send its URL
-//   // res.send({ fileContent: dxfString })
-//   res.send(dxfString)
-// })
+// Generate Half
+app.post('/dxf/half', (req, res) => {
+  const { l, w, h, t } = req.body
+  // Generate DXF
+  const dxfString = generateHalf(l, w, h, t)
+  res.send(dxfString)
+})
+
+// Generate Open Half Box
+app.post('/dxf/half-open', (req, res) => {
+  const { l, w, h, t } = req.body
+  // Generate DXF
+  const dxfString = generateHalfOpen(l, w, h, t)
+  res.send(dxfString)
+})
 
 app.listen(port, () => {
   console.log(`Server running  on port ${port}`)
