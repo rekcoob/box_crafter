@@ -30,23 +30,21 @@ export default {
           4: 'C',
           3: 'B'
         }
-
-        // Define your API endpoint based on the environment
-
-        // let filename = `${this.results.length}x${this.results.width}x${this.results.height}_`
-        // filename += thicknessMap[this.thickn] || 'output'
-        // filename += '.dxf'
         const filename = `${this.results.length}x${this.results.width}x${this.results.height}_${thicknessMap[this.thickn] || 'output'}.dxf`
 
-        const apiUrl = `http://localhost:5000/dxf/${this.boxStyle}`
+        // const apiUrl = `http://localhost:5000/dxf/${this.boxStyle}`
+
+        let apiUrl
+        if (import.meta.env.NODE_ENV === 'production') {
+          // Production mode
+          apiUrl = `dxf/${this.boxStyle}`
+        } else {
+          // Development mode
+          apiUrl = `http://localhost:5000/dxf/${this.boxStyle}`
+        }
 
         const response = await axios.post(
           apiUrl,
-          // // localhost
-          // 'http://localhost:5000/dxf/`this.apiUrl',
-          // `http://localhost:5000/dxf/${this.boxStyle}`,
-          // // deploy
-          // '/dxf',
           {
             l: this.results.length,
             w: this.results.width,
