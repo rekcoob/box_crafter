@@ -76,7 +76,6 @@ export default {
 
 <template>
   <div class="container">
-    boxstyle {{ this.boxStyle }}
     <!-- Error message -->
     <p v-show="!formValid" class="error-message">{{ errorMessage }}</p>
 

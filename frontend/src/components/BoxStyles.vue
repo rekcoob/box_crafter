@@ -28,23 +28,23 @@ export default {
     </select>
     <div v-if="selectedOption === 'box'">
       <p>Krabica</p>
-      <p><b>FEFCO Code:</b> 0200</p>
+      <p><b>FEFCO Code:</b> 0201</p>
       <img src="@/assets/images/box.jpg" alt="box image" />
     </div>
     <div v-else-if="selectedOption === 'box-open'">
       <p>Klopová krabica</p>
-      <p><b>FEFCO Code:</b> 0201</p>
+      <p><b>FEFCO Code:</b> 0200</p>
       <img src="@/assets/images/box-open.jpg" alt="box-open" />
     </div>
     <div v-else-if="selectedOption === 'half'">
       <p>Polovica krabice</p>
-      <p><b>FEFCO Code:</b> 0200</p>
+      <p><b>FEFCO Code:</b> 0201</p>
       <img src="@/assets/images/half.jpg" alt="half" />
     </div>
 
     <div v-else-if="selectedOption === 'half-open'">
       <p>Polovica klopovej krabice</p>
-      <p><b>FEFCO Code:</b> 0201</p>
+      <p><b>FEFCO Code:</b> 0200</p>
       <img src="@/assets/images/half-open.jpg" alt="half-open" />
     </div>
   </div>

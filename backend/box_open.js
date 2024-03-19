@@ -7,7 +7,7 @@ function generateBoxOpen(l, w, h, t) {
   // Nadmiera sirky = Sirka + hrubka materialu
   const wt = w + t
   // Vyska klopy
-  const k = t === 5 ? w / 2 + 4 : w / 2
+  const k = t === 5 ? w / 2 + 4 : t === 4 ? w / 2 + 2 : w / 2 + 1
   // Nadmiera vysky = Vyska + hrubka materialu * 2
   const htk = h + t + k
   // Spary
@@ -24,7 +24,7 @@ function generateBoxOpen(l, w, h, t) {
     .drawLine(0, 0, lt2 - s, 0) // horizontal-lower-1
     .drawLine(lt2 + s, 0, lt2 + wt - s, 0) // horizontal-lower-2
     .drawLine(lt2 + wt + s, 0, lt + lt2 + wt - s, 0) // horizontal-lower-3
-    .drawLine(lt + lt2 + wt + s, 0, lt + lt2 + wt * 2, 0) // horizontal-lower-4
+    .drawLine(lt + lt2 + wt + s, 0, lt + lt2 + wt * 2 - s, 0) // horizontal-lower-4
     // Klopy Vyseky Vertical Lower
     .drawLine(lt2 - s, 0, lt2 - s, k) // klopy-lower-1
     .drawLine(lt2 + s, 0, lt2 + s, k) // klopy-lower-2
@@ -32,11 +32,12 @@ function generateBoxOpen(l, w, h, t) {
     .drawLine(lt2 + wt + s, 0, lt2 + wt + s, k) // klopy-lower-4
     .drawLine(lt + lt2 + wt - s, 0, lt + lt2 + wt - s, k) // klopy-lower-5
     .drawLine(lt + lt2 + wt + s, 0, lt + lt2 + wt + s, k) // klopy-lower-6
-    .drawLine(lt + lt2 + wt * 2, 0, lt + lt2 + wt * 2, k) // klopy-lower-7
+    .drawLine(lt + lt2 + wt * 2 - s, 0, lt + lt2 + wt * 2 - s, k) // klopy-lower-7
     // Spary Vyseky Horizontal Lower
     .drawLine(lt2 - s, k, lt2 + s, k) // Spary-lower-1
     .drawLine(lt2 + wt - s, k, lt2 + wt + s, k) // Spary-lower-2
     .drawLine(lt + lt2 + wt - s, k, lt + lt2 + wt + s, k) // Spary-lower-3
+    .drawLine(lt2 + lt + 2 * wt - s, k, lt + lt2 + wt * 2, k) // Spary-lower-4-zalozka
     // Zalozka Sikmina Lower
     .drawLine(lt + lt2 + wt * 2, k, lt + lt2 + wt * 2 + 40, k + 6)
     // Zalozka Sikmina Upper
@@ -47,7 +48,11 @@ function generateBoxOpen(l, w, h, t) {
   // Crease layer
   d.addLayer('Crease', Drawing.ACI.RED, 'CONTINUOUS')
     .setActiveLayer('Crease')
-    .drawLine(0, k, lt + lt2 + wt * 2, k) // horizontal-lower-full
+    // Horizontal Lower
+    .drawLine(0, k, lt2 - s, k) // Horizontal-lower-1
+    .drawLine(lt2 + s, k, lt2 + wt - s, k) // Horizontal-lower-2
+    .drawLine(lt2 + wt + s, k, lt2 + lt + wt - s, k) // Horizontal-lower-3
+    .drawLine(lt2 + lt + wt + s, k, lt2 + lt + 2 * wt - s, k) // Horizontal-lower-4
     .drawLine(lt2, k, lt2, htk) // vertical-1
     .drawLine(lt2 + wt, k, lt2 + wt, htk) // vertical-2
     .drawLine(lt + lt2 + wt, k, lt + lt2 + wt, htk) // vertical-3

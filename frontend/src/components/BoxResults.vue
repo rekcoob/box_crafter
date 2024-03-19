@@ -21,7 +21,7 @@ export default {
       // Vyska Klopy pri BC a pri B, C
       const extraHeight = thickn === 5 ? width / 2 + 4 : width / 2
       const formatX = (length + width + thickn * 2) * 2 + 38
-      const formatY = height + thickn + extraHeight * 2
+      const formatY = height + (thickn + extraHeight) * 2
       return `${formatX}x${formatY}`
     },
     // Get Material Function

@@ -7,7 +7,8 @@ function generateBoxOriginal(l, w, h, t) {
   // Nadmiera sirky = Sirka + hrubka materialu
   const wt = w + t
   // Vyska klopy
-  const k = t === 5 ? w / 2 + 4 : w / 2
+  // const k = t === 5 ? w / 2 + 4 : w / 2
+  const k = t === 5 ? w / 2 + 4 : t === 4 ? w / 2 + 2 : w / 2 + 1
   // Nadmiera vysky = Vyska + hrubka materialu * 2
   const htk = h + t * 2 + k
   const htk2 = h + 2 * (t + k)

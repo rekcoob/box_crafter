@@ -7,7 +7,7 @@ function generateHalfOpen(l, w, h, t) {
   // Nadmiera sirky = Sirka + hrubka materialu
   const wt = w + t
   // Vyska klopy
-  const k = t === 5 ? w / 2 + 4 : w / 2
+  const k = t === 5 ? w / 2 + 4 : t === 4 ? w / 2 + 2 : w / 2 + 1
   // Nadmiera vysky = Vyska + hrubka materialu * 2
   const htk = h + t + k
   const htk2 = h + 2 * k + t
@@ -23,13 +23,14 @@ function generateHalfOpen(l, w, h, t) {
     .drawLine(0, htk, lt + wt, htk)
     // Horizontal Lower
     .drawLine(0, 0, lt - s, 0) // horizontal-lower-1
-    .drawLine(lt + s, 0, lt + wt, 0) // horizontal-lower-2
+    .drawLine(lt + s, 0, lt + wt - s, 0) // horizontal-lower-2
     // Klopy Vyseky Vertical Lower
     .drawLine(lt - s, 0, lt - s, k) // klopy-lower-1
     .drawLine(lt + s, 0, lt + s, k) // klopy-lower-2
-    .drawLine(lt + wt, 0, lt + wt, k) // klopy-lower-3
+    .drawLine(lt + wt - s, 0, lt + wt - s, k) // klopy-lower-3
     // Spary Vyseky Horizontal Lower
     .drawLine(lt - s, k, lt + s, k) // Spary-lower-1
+    .drawLine(lt + wt - s, k, lt + wt, k) // Spary-lower-4-zalozka
     // Zalozka Sikmina Lower
     .drawLine(lt + wt, k, lt + wt + 40, k + 6)
     // Zalozka Sikmina Upper
@@ -40,7 +41,8 @@ function generateHalfOpen(l, w, h, t) {
   // Crease layer
   d.addLayer('Crease', Drawing.ACI.RED, 'CONTINUOUS')
     .setActiveLayer('Crease')
-    .drawLine(0, k, lt + wt, k) // horizontal-lower-full
+    .drawLine(0, k, lt - s, k) // Horizontal-lower-1
+    .drawLine(lt + s, k, lt + wt - s, k) // Horizontal-lower-2
     .drawLine(lt, k, lt, htk) // vertical-1
     .drawLine(lt + wt, k, lt + wt, htk) // vertical-2
 
