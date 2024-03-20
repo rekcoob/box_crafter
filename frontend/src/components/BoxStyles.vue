@@ -25,6 +25,7 @@ export default {
       <option value="box-open">box-open</option>
       <option value="half">half</option>
       <option value="half-open">half-open</option>
+      <option value="box-q">box-q</option>
     </select>
     <div v-if="selectedOption === 'box'">
       <p>Krabica</p>
@@ -46,6 +47,11 @@ export default {
       <p>Polovička otvorenej krabice</p>
       <p><b>FEFCO Code:</b> 0200</p>
       <img src="@/assets/images/half-open.jpg" alt="half-open" />
+    </div>
+    <div v-else-if="selectedOption === 'box-q'">
+      <p>Box-Q</p>
+      <p><b>FEFCO Code:</b> 0200</p>
+      <img src="@/assets/images/box.jpg" alt="box-q" />
     </div>
   </div>
 </template>

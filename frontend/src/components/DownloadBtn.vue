@@ -32,10 +32,10 @@ export default {
         }
         const filename = `${this.results.length}x${this.results.width}x${this.results.height}_${thicknessMap[this.thickn] || 'output'}.dxf`
 
-        // const apiUrl = `http://localhost:5000/dxf/${this.boxStyle}`
-
+        // https://vitejs.dev/guide/env-and-mode.html
         let apiUrl
-        if (import.meta.env.NODE_ENV === 'production') {
+
+        if (import.meta.env.MODE === 'production') {
           // Production mode
           apiUrl = `dxf/${this.boxStyle}`
         } else {

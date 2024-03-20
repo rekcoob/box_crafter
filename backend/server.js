@@ -11,6 +11,7 @@ const { generateBox } = require('./box.js')
 const { generateBoxOpen } = require('./box_open.js')
 const { generateHalf } = require('./half.js')
 const { generateHalfOpen } = require('./half_open.js')
+const { generateBoxQ } = require('./box_q.js')
 
 // Constants and Configuration
 const port = process.env.PORT || 5000
@@ -73,6 +74,14 @@ app.post('/dxf/half-open', (req, res) => {
   const { l, w, h, t } = req.body
   // Generate DXF
   const dxfString = generateHalfOpen(l, w, h, t)
+  res.send(dxfString)
+})
+
+// Generate Box-Q
+app.post('/dxf/box-q', (req, res) => {
+  const { l, w, h, t } = req.body
+  // Generate DXF
+  const dxfString = generateBoxQ(l, w, h, t)
   res.send(dxfString)
 })
 
