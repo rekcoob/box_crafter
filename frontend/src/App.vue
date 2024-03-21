@@ -30,12 +30,12 @@ export default {
   computed: {
     processedInputs() {
       // If Width > Length => Swap them
-      const { length, width } = this.inputs
+      const { length, width, height } = this.inputs
       if (width > length) {
         return {
           length: width,
           width: length,
-          height: this.inputs.height
+          height: height
         }
       } else {
         return this.inputs
@@ -64,10 +64,7 @@ export default {
     <div class="inputs">
       <div class="input-section">
         <MaterialButtons @thicknChanged="handleThicknChange" />
-        <DimensionsInput
-          @inputsChanged="handleInputsChange"
-          @form-validity-changed="updateButtonColor"
-        />
+        <DimensionsInput @inputsChanged="handleInputsChange" />
       </div>
       <BoxStyles @optionSelected="updateSelectedOption" />
     </div>
@@ -77,8 +74,12 @@ export default {
       :boxStyle="boxStyle"
       :formValid="formValid"
     />
-    <BoxResults :results="processedInputs" :thickn="thickn" :formValid="formValid" />
-    <BoxImage />
+    <BoxResults
+      :results="processedInputs"
+      :thickn="thickn"
+      :boxStyle="boxStyle"
+      :formValid="formValid"
+    />
   </div>
 </template>
 

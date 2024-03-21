@@ -76,9 +76,6 @@ export default {
   <div class="container">
     <!-- Error message -->
     <p v-show="!formValid" class="error-message">{{ errorMessage }}</p>
-
-    <p>length {{ this.results.length }}</p>
-    <p>width {{ this.results.width }}</p>
     <button class="btn-primary" :class="{ ready: formValid }" @click="downloadFile">
       Stiahnuť
     </button>

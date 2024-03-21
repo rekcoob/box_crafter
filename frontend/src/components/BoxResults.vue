@@ -12,17 +12,37 @@ export default {
       height: Number
     },
     thickn: Number,
+    boxStyle: String,
     formValid: Boolean
   },
   methods: {
     calculateFormat() {
       const { length, width, height } = this.results
-      const { thickn } = this
-      // Vyska Klopy pri BC a pri B, C
-      const extraHeight = thickn === 5 ? width / 2 + 4 : width / 2
-      const formatX = (length + width + thickn * 2) * 2 + 38
-      const formatY = height + (thickn + extraHeight) * 2
-      return `${formatX}x${formatY}`
+      const { thickn, boxStyle } = this
+      // Flap Height Depending on Material Thickness
+      let flapHeight
+      if (thickn === 5) {
+        flapHeight = width / 2 + 4
+      } else if (thickn === 4) {
+        flapHeight = width / 2 + 2
+      } else {
+        flapHeight = width / 2 + 1
+      }
+      // Format Calculation Depending on Box Style
+      let format
+      const boxLength = length + width + thickn * 2
+      if (boxStyle === 'box') {
+        format = `${boxLength * 2 + 38} x ${height + (thickn + flapHeight) * 2}`
+      } else if (boxStyle === 'box-open') {
+        format = `${boxLength * 2 + 38} x ${height + thickn + flapHeight}`
+      } else if (boxStyle === 'half') {
+        format = `${boxLength + 40} x ${height + (thickn + flapHeight) * 2}`
+      } else if (boxStyle === 'half-open') {
+        format = `${boxLength + 40} x ${height + thickn + flapHeight}`
+      } else {
+        format = `${boxLength * 2 + 38} x ${height + (thickn + flapHeight) * 2}`
+      }
+      return format
     },
     // Get Material Function
     getMat() {
