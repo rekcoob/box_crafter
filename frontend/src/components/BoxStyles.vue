@@ -21,11 +21,11 @@ export default {
   <div class="boxstyles">
     <h3>Typ Krabice</h3>
     <select v-model="selectedOption" @change="sendSelectedOption">
-      <option value="box">box</option>
-      <option value="box-open">box-open</option>
-      <option value="half">half</option>
-      <option value="half-open">half-open</option>
-      <option value="box-q">box-q</option>
+      <option value="box">krabica</option>
+      <option value="box-open">krabica otvorená</option>
+      <option value="half">polovička</option>
+      <option value="half-open">polovička otvorená</option>
+      <option value="box-q">test</option>
     </select>
     <div v-if="selectedOption === 'box'">
       <p>Krabica</p>
@@ -49,9 +49,9 @@ export default {
       <img src="@/assets/images/half-open.jpg" alt="half-open" />
     </div>
     <div v-else-if="selectedOption === 'box-q'">
-      <p>Box-Q</p>
+      <p>Testing Box-Q</p>
       <p><b>FEFCO Code:</b> 0200</p>
-      <img src="@/assets/images/box.jpg" alt="box-q" />
+      <img src="@/assets/images/box-q.jpg" alt="box-q" />
     </div>
   </div>
 </template>
@@ -63,6 +63,6 @@ export default {
 img {
   width: 500px; /* Adjust the width as per your requirement */
   height: auto; /* Maintain aspect ratio */
-  height: 300px;
+  /* height: 300px; */
 }
 </style>
