@@ -15,11 +15,12 @@ function generateBoxQ(l, w, h, t) {
   // const s = 4
   const s = t === 5 ? 4 : 3
 
+  // https://github.com/tarikjabiri/js-dxf/tree/master
   let d = new Drawing()
 
   // Draw lines based on input
   // Cut Layer
-  d.drawLine(0, htk2, 0, 0) // 1vertical-full
+  d.drawLine(0, htk2, 0, 0) // Vertical-full-1
     // Horizontal Lower
     .drawLine(0, 0, lt2 - s, 0) // horizontal-lower-1
     .drawLine(lt2 + s, 0, lt2 + wt - s, 0) // horizontal-lower-2

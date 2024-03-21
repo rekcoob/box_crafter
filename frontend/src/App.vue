@@ -26,6 +26,22 @@ export default {
       formValid: false
     }
   },
+  // A computed property automatically tracks its reactive dependencies.
+  computed: {
+    processedInputs() {
+      // If Width > Length => Swap them
+      const { length, width } = this.inputs
+      if (width > length) {
+        return {
+          length: width,
+          width: length,
+          height: this.inputs.height
+        }
+      } else {
+        return this.inputs
+      }
+    }
+  },
   methods: {
     handleInputsChange(data) {
       this.inputs = data.inputs
@@ -42,13 +58,11 @@ export default {
 </script>
 
 <template>
-  <h2>BigBox Crafter ♥</h2>
+  <h2>BigBox Crafter</h2>
 
   <div class="container">
-    <!-- <p>BoxStyle {{ boxStyle }}</p> -->
     <div class="inputs">
       <div class="input-section">
-        <!-- <DimensionsInput @input="length = $event.target.value" /> -->
         <MaterialButtons @thicknChanged="handleThicknChange" />
         <DimensionsInput
           @inputsChanged="handleInputsChange"
@@ -57,8 +71,13 @@ export default {
       </div>
       <BoxStyles @optionSelected="updateSelectedOption" />
     </div>
-    <DownloadBtn :results="inputs" :thickn="thickn" :boxStyle="boxStyle" :formValid="formValid" />
-    <BoxResults :results="inputs" :thickn="thickn" :formValid="formValid" />
+    <DownloadBtn
+      :results="processedInputs"
+      :thickn="thickn"
+      :boxStyle="boxStyle"
+      :formValid="formValid"
+    />
+    <BoxResults :results="processedInputs" :thickn="thickn" :formValid="formValid" />
     <BoxImage />
   </div>
 </template>
