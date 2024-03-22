@@ -1,5 +1,5 @@
 <script>
-import axios from 'axios'
+import { downloadFile } from '@/services/downloadFile'
 
 export default {
   props: {
@@ -20,50 +20,7 @@ export default {
   methods: {
     async downloadFile() {
       try {
-        if (!this.formValid) {
-          // If form is not valid, display error message and return
-          this.errorMessage = 'Ferenc, Vyplň vsetky rozmery!'
-          return
-        }
-        const thicknessMap = {
-          5: 'BC',
-          4: 'C',
-          3: 'B'
-        }
-        const filename = `${this.results.length}x${this.results.width}x${this.results.height}_${thicknessMap[this.thickn] || 'output'}.dxf`
-
-        // https://vitejs.dev/guide/env-and-mode.html
-        let apiUrl
-
-        if (import.meta.env.MODE === 'production') {
-          // Production mode
-          apiUrl = `dxf/${this.boxStyle}`
-        } else {
-          // Development mode
-          apiUrl = `http://localhost:5000/dxf/${this.boxStyle}`
-        }
-
-        const response = await axios.post(
-          apiUrl,
-          {
-            l: this.results.length,
-            w: this.results.width,
-            h: this.results.height,
-            t: this.thickn
-          },
-          {
-            // Important! This tells Axios to treat the response as a binary blob
-            responseType: 'blob'
-          }
-        )
-        const url = window.URL.createObjectURL(new Blob([response.data]))
-        const link = document.createElement('a')
-        link.href = url
-
-        // Set the filename and extension of your file
-        link.setAttribute('download', filename)
-        document.body.appendChild(link)
-        link.click()
+        await downloadFile(this.results, this.thickn, this.boxStyle)
       } catch (err) {
         console.error('Error downloading file:', err)
       }
@@ -122,3 +79,4 @@ button {
   color: red;
 }
 </style>
+@/services/downloadFile

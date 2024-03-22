@@ -77,9 +77,9 @@ img {
   background-color: inherit;
   border: 1px solid #1e84ff;
   border-radius: 0.25rem;
-  transition:
+  /* transition:
     border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
+    box-shadow 0.15s ease-in-out; */
 }
 .custom-select:focus {
   border-color: #1e84ff;
