@@ -1,59 +1,58 @@
-<script>
-export default {
-  data() {
-    return {
-      showResults: false
-    }
+<script setup>
+const props = defineProps({
+  results: {
+    length: Number,
+    width: Number,
+    height: Number
   },
-  props: {
-    results: {
-      length: Number,
-      width: Number,
-      height: Number
-    },
-    thickn: Number,
-    boxStyle: String,
-    formValid: Boolean
-  },
-  methods: {
-    calculateFormat() {
-      const { length, width, height } = this.results
-      const { thickn, boxStyle } = this
-      // Flap Height Depending on Material Thickness
-      let flapHeight
-      if (thickn === 5) {
-        flapHeight = width / 2 + 4
-      } else if (thickn === 4) {
-        flapHeight = width / 2 + 2
-      } else {
-        flapHeight = width / 2 + 1
-      }
-      // Format Calculation Depending on Box Style
-      let format
-      const boxLength = length + width + thickn * 2
-      if (boxStyle === 'box') {
-        format = `${boxLength * 2 + 38} x ${height + (thickn + flapHeight) * 2}`
-      } else if (boxStyle === 'box-open') {
-        format = `${boxLength * 2 + 38} x ${height + thickn + flapHeight}`
-      } else if (boxStyle === 'half') {
-        format = `${boxLength + 40} x ${height + (thickn + flapHeight) * 2}`
-      } else if (boxStyle === 'half-open') {
-        format = `${boxLength + 40} x ${height + thickn + flapHeight}`
-      } else {
-        format = `${boxLength * 2 + 38} x ${height + (thickn + flapHeight) * 2}`
-      }
-      return format
-    },
-    // Get Material Function
-    getMat() {
-      const mapping = {
-        5: 'BC',
-        4: 'C',
-        3: 'B'
-      }
-      return mapping[this.thickn] || ''
-    }
+  thickn: Number,
+  boxStyle: String,
+  formValid: Boolean
+})
+
+const calculateFormat = () => {
+  const { length, width, height } = props.results
+  const { thickn, boxStyle } = props
+
+  // Flap Height Depending on Material Thickness
+  let flapHeight
+  if (thickn === 5) {
+    flapHeight = width / 2 + 4
+  } else if (thickn === 4) {
+    flapHeight = width / 2 + 2
+  } else {
+    flapHeight = width / 2 + 1
   }
+
+  // Format Calculation Depending on Box Style
+  const boxLength = length + width + thickn * 2
+  let format
+  switch (boxStyle) {
+    case 'box':
+      format = `${boxLength * 2 + 38} x ${height + (thickn + flapHeight) * 2}`
+      break
+    case 'box-open':
+      format = `${boxLength * 2 + 38} x ${height + thickn + flapHeight}`
+      break
+    case 'half':
+      format = `${boxLength + 40} x ${height + (thickn + flapHeight) * 2}`
+      break
+    case 'half-open':
+      format = `${boxLength + 40} x ${height + thickn + flapHeight}`
+      break
+    default:
+      format = `${boxLength * 2 + 38} x ${height + (thickn + flapHeight) * 2}`
+  }
+  return format
+}
+// Get Material Function
+const getMat = () => {
+  const mapping = {
+    5: 'BC',
+    4: 'C',
+    3: 'B'
+  }
+  return mapping[props.thickn] || ''
 }
 </script>
 

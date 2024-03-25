@@ -1,30 +1,29 @@
-<script>
-import { downloadFile } from '@/services/downloadFile'
+<script setup>
+import { ref } from 'vue'
+import { downloadFile as downloadFileService } from '@/services/downloadFile'
 
-export default {
-  props: {
-    results: {
-      length: Number,
-      width: Number,
-      height: Number
-    },
-    thickn: Number,
-    boxStyle: String,
-    formValid: Boolean
+// const { results, thickn, boxStyle, formValid } = defineProps({
+const props = defineProps({
+  results: {
+    length: Number,
+    width: Number,
+    height: Number
   },
-  data() {
-    return {
-      errorMessage: ''
-    }
-  },
-  methods: {
-    async downloadFile() {
-      try {
-        await downloadFile(this.results, this.thickn, this.boxStyle)
-      } catch (err) {
-        console.error('Error downloading file:', err)
-      }
-    }
+  thickn: Number,
+  boxStyle: String,
+  formValid: Boolean
+})
+const errorMessage = ref('')
+
+const downloadFile = async () => {
+  if (!props.formValid) {
+    errorMessage.value = 'Ferenc, Vyplň vsetky rozmery!'
+    return
+  }
+  try {
+    await downloadFileService(props.results, props.thickn, props.boxStyle)
+  } catch (err) {
+    console.error('Error downloading file:', err)
   }
 }
 </script>
@@ -79,4 +78,3 @@ button {
   color: red;
 }
 </style>
-@/services/downloadFile

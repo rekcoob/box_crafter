@@ -1,59 +1,45 @@
-<script>
+<script setup>
+import { ref, computed } from 'vue'
 import MaterialButtons from '@/components/MaterialButtons.vue'
 import DimensionsInput from '@/components/DimensionsInput.vue'
 import BoxStyles from '@/components/BoxStyles.vue'
 import BoxResults from '@/components/BoxResults.vue'
 import DownloadBtn from '@/components/DownloadBtn.vue'
 
-export default {
-  name: 'App',
-  components: {
-    MaterialButtons,
-    DimensionsInput,
-    BoxStyles,
-    BoxResults,
-    DownloadBtn
-  },
-  data() {
+const inputs = ref({
+  length: null,
+  width: null,
+  height: null
+})
+const thickn = ref(5)
+const boxStyle = ref('box')
+const formValid = ref(false)
+
+const processedInputs = computed(() => {
+  const { length, width, height } = inputs.value
+  // If Width > Length => Swap them
+  if (width > length) {
     return {
-      inputs: {
-        length: null,
-        width: null,
-        height: null
-      },
-      thickn: 5,
-      boxStyle: 'box',
-      formValid: false
+      length: width,
+      width: length,
+      height: height
     }
-  },
-  // A computed property automatically tracks its reactive dependencies.
-  computed: {
-    processedInputs() {
-      // If Width > Length => Swap them
-      const { length, width, height } = this.inputs
-      if (width > length) {
-        return {
-          length: width,
-          width: length,
-          height: height
-        }
-      } else {
-        return this.inputs
-      }
-    }
-  },
-  methods: {
-    handleInputsChange(data) {
-      this.inputs = data.inputs
-      this.formValid = data.formValid
-    },
-    handleThicknChange(t) {
-      this.thickn = t
-    },
-    updateSelectedOption(option) {
-      this.boxStyle = option
-    }
+  } else {
+    return inputs.value
   }
+})
+
+const handleInputsChange = (data) => {
+  inputs.value = data.inputs
+  formValid.value = data.formValid
+}
+
+const handleThicknChange = (t) => {
+  thickn.value = t
+}
+
+const updateSelectedOption = (option) => {
+  boxStyle.value = option
 }
 </script>
 

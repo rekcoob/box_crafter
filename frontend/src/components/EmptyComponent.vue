@@ -1,7 +1,9 @@
-<script>
-export default {
-  // Component definition
-}
+<script setup>
+import { ref } from 'vue'
+const props = defineProps({
+  foo: String
+})
+const emit = defineEmits(['change', 'delete'])
 </script>
 
 <!-- YourComponent.vue -->

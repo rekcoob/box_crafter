@@ -1,26 +1,23 @@
-<script>
-export default {
-  data() {
-    return {
-      mat: 3,
-      thickn: 5
-    }
-  },
-  methods: {
-    switchActive(n) {
-      this.mat = n
-      if (n === 1) {
-        this.thickn = 3
-        this.$emit('thicknChanged', this.thickn)
-      } else if (n === 2) {
-        this.thickn = 4
-        this.$emit('thicknChanged', this.thickn)
-      } else {
-        this.thickn = 5
-        this.$emit('thicknChanged', this.thickn)
-      }
-    }
+<script setup>
+import { ref, defineEmits } from 'vue'
+
+const mat = ref(3)
+const thickn = ref(5)
+const emit = defineEmits(['thicknChanged'])
+
+const switchActive = (n) => {
+  mat.value = n
+  switch (n) {
+    case 1:
+      thickn.value = 3
+      break
+    case 2:
+      thickn.value = 4
+      break
+    default:
+      thickn.value = 5
   }
+  emit('thicknChanged', thickn.value)
 }
 </script>
 

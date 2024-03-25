@@ -1,18 +1,48 @@
-<script>
+<script setup>
 import { ref } from 'vue'
+import boxImage from '@/assets/images/box.jpg'
+import boxOpenImage from '@/assets/images/box-open.jpg'
+import halfImage from '@/assets/images/half.jpg'
+import halfOpenImage from '@/assets/images/half-open.jpg'
+import boxQImage from '@/assets/images/box-q.jpg'
 
-export default {
-  setup(_, { emit }) {
-    const selectedOption = ref('box')
+const selectedOption = ref('box')
+const emit = defineEmits(['optionSelected'])
 
-    const sendSelectedOption = () => {
-      emit('optionSelected', selectedOption.value)
-    }
+const sendSelectedOption = () => {
+  emit('optionSelected', selectedOption.value)
+}
 
-    return {
-      selectedOption,
-      sendSelectedOption
-    }
+const options = {
+  box: {
+    label: 'Krabica',
+    fefcoCode: '0201',
+    image: boxImage,
+    alt: 'box image'
+  },
+  'box-open': {
+    label: 'Otvorená krabica',
+    fefcoCode: '0200',
+    image: boxOpenImage,
+    alt: 'box-open'
+  },
+  half: {
+    label: 'Polovička krabice',
+    fefcoCode: '0201',
+    image: halfImage,
+    alt: 'half'
+  },
+  'half-open': {
+    label: 'Polovička otvorenej krabice',
+    fefcoCode: '0200',
+    image: halfOpenImage,
+    alt: 'half-open'
+  },
+  'box-q': {
+    label: 'Testing Box-Q',
+    fefcoCode: '0200',
+    image: boxQImage,
+    alt: 'box-q'
   }
 }
 </script>
@@ -29,31 +59,10 @@ export default {
         <option value="box-q">test</option>
       </select>
     </div>
-    <div v-if="selectedOption === 'box'">
-      <p>Krabica</p>
-      <p><b>FEFCO Code:</b> 0201</p>
-      <img src="@/assets/images/box.jpg" alt="box image" />
-    </div>
-    <div v-else-if="selectedOption === 'box-open'">
-      <p>Otvorená krabica</p>
-      <p><b>FEFCO Code:</b> 0200</p>
-      <img src="@/assets/images/box-open.jpg" alt="box-open" />
-    </div>
-    <div v-else-if="selectedOption === 'half'">
-      <p>Polovička krabice</p>
-      <p><b>FEFCO Code:</b> 0201</p>
-      <img src="@/assets/images/half.jpg" alt="half" />
-    </div>
-
-    <div v-else-if="selectedOption === 'half-open'">
-      <p>Polovička otvorenej krabice</p>
-      <p><b>FEFCO Code:</b> 0200</p>
-      <img src="@/assets/images/half-open.jpg" alt="half-open" />
-    </div>
-    <div v-else-if="selectedOption === 'box-q'">
-      <p>Testing Box-Q</p>
-      <p><b>FEFCO Code:</b> 0200</p>
-      <img src="@/assets/images/box-q.jpg" alt="box-q" />
+    <div v-if="selectedOption">
+      <p>{{ options[selectedOption].label }}</p>
+      <p><b>FEFCO Code:</b> {{ options[selectedOption].fefcoCode }}</p>
+      <img :src="options[selectedOption].image" :alt="options[selectedOption].alt" />
     </div>
   </div>
 </template>
@@ -77,9 +86,9 @@ img {
   background-color: inherit;
   border: 1px solid #1e84ff;
   border-radius: 0.25rem;
-  /* transition:
+  transition:
     border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out; */
+    box-shadow 0.15s ease-in-out;
 }
 .custom-select:focus {
   border-color: #1e84ff;
