@@ -6,7 +6,10 @@ export async function downloadFile(results, thickn, boxStyle) {
     4: 'C',
     3: 'B'
   }
-  const filename = `${results.length}x${results.width}x${results.height}_${thicknessMap[thickn] || 'output'}.dxf`
+
+  const boxName = boxStyle === 'box' || boxStyle === 'box-open' ? 'Krabica' : 'Polovička'
+  const fefcoCode = boxStyle === 'box' || boxStyle === 'half' ? '0201' : '0200'
+  const filename = `${boxName}_${fefcoCode}_${results.length}x${results.width}x${results.height}_${thicknessMap[thickn] || 'output'}.dxf`
 
   let apiUrl
   if (import.meta.env.MODE === 'production') {
