@@ -15,25 +15,25 @@ const sendSelectedOption = () => {
 
 const options = {
   box: {
-    label: 'Krabica',
+    label: 'Regular Slotted Box',
     fefcoCode: '0201',
     image: boxImage,
     alt: 'box image'
   },
   'box-open': {
-    label: 'Otvorená krabica',
+    label: 'Half Slotted Box',
     fefcoCode: '0200',
     image: boxOpenImage,
     alt: 'box-open'
   },
   half: {
-    label: 'Polovička krabice',
+    label: 'Slotted Half',
     fefcoCode: '0201',
     image: halfImage,
     alt: 'half'
   },
   'half-open': {
-    label: 'Polovička otvorenej krabice',
+    label: 'Half Slotted Half',
     fefcoCode: '0200',
     image: halfOpenImage,
     alt: 'half-open'
@@ -49,14 +49,14 @@ const options = {
 
 <template>
   <div class="boxstyles">
-    <h3>Typ Krabice</h3>
+    <h3>Box Style</h3>
     <div class="custom-select-wrapper">
       <select v-model="selectedOption" @change="sendSelectedOption" class="custom-select">
-        <option value="box">krabica</option>
-        <option value="box-open">krabica otvorená</option>
-        <option value="half">polovička</option>
-        <option value="half-open">polovička otvorená</option>
-        <option value="box-q">test</option>
+        <option value="box">box</option>
+        <option value="box-open">box open</option>
+        <option value="half">half</option>
+        <option value="half-open">half open</option>
+        <!-- <option value="box-q">test</option> -->
       </select>
     </div>
     <div v-if="selectedOption">
@@ -97,7 +97,7 @@ img {
 }
 /* Dropdown menu */
 .custom-select option {
-  background-color: #333; /* Dark background color */
-  color: #fff; /* Text color */
+  background-color: #333;
+  color: #fff;
 }
 </style>

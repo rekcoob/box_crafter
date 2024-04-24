@@ -24,16 +24,6 @@ app.use(cors())
 // Serve static files from the frontend build directory
 app.use(express.static(path.join(__dirname, '../frontend/dist')))
 
-// Get /
-const data = [
-  { id: 1, name: 'John' },
-  { id: 2, name: 'Bob' },
-]
-app.get('/', (req, res) => {
-  // res.send('API is running')
-  res.json(data)
-})
-
 // POST /dxf Generate Regular Slotted Box
 app.post('/dxf', (req, res) => {
   const { l, w, h, t } = req.body
@@ -48,7 +38,7 @@ app.post('/dxf', (req, res) => {
 // Generate Regular Slotted Box
 app.post('/dxf/box', (req, res) => {
   const { l, w, h, t } = req.body
-  // Generate DXF
+
   const dxfString = generateBox(l, w, h, t)
   res.send(dxfString)
 })
@@ -56,7 +46,7 @@ app.post('/dxf/box', (req, res) => {
 // Generate Open Box
 app.post('/dxf/box-open', (req, res) => {
   const { l, w, h, t } = req.body
-  // Generate DXF
+
   const dxfString = generateBoxOpen(l, w, h, t)
   res.send(dxfString)
 })
@@ -64,7 +54,7 @@ app.post('/dxf/box-open', (req, res) => {
 // Generate Half
 app.post('/dxf/half', (req, res) => {
   const { l, w, h, t } = req.body
-  // Generate DXF
+
   const dxfString = generateHalf(l, w, h, t)
   res.send(dxfString)
 })
@@ -72,7 +62,7 @@ app.post('/dxf/half', (req, res) => {
 // Generate Open Half Box
 app.post('/dxf/half-open', (req, res) => {
   const { l, w, h, t } = req.body
-  // Generate DXF
+
   const dxfString = generateHalfOpen(l, w, h, t)
   res.send(dxfString)
 })
@@ -80,7 +70,7 @@ app.post('/dxf/half-open', (req, res) => {
 // Generate Box-Q
 app.post('/dxf/box-q', (req, res) => {
   const { l, w, h, t } = req.body
-  // Generate DXF
+
   const dxfString = generateBoxQ(l, w, h, t)
   res.send(dxfString)
 })

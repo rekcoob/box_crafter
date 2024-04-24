@@ -23,7 +23,7 @@ const switchActive = (n) => {
 
 <template>
   <div class="material">
-    <h3>Materiál</h3>
+    <h3>Material</h3>
     <div class="craft">
       <button class="btn-primary" :class="{ active: mat === 1 }" @click="switchActive(1)">B</button>
       <button class="btn-primary" :class="{ active: mat === 2 }" @click="switchActive(2)">C</button>
@@ -31,7 +31,7 @@ const switchActive = (n) => {
         BC
       </button>
     </div>
-    <p><b>Hrúbka:</b> {{ thickn }} mm</p>
+    <p><b>Thickness:</b> {{ thickn }} mm</p>
   </div>
 </template>
 

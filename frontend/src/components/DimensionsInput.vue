@@ -28,26 +28,26 @@ export default {
   <div class="">
     <form>
       <div class="form-group">
-        <h3>Vnútorné rozmery krabice</h3>
+        <h3>Inner Dimensions</h3>
         <input
           v-model.number="inputs.length"
           @input="emitInputs"
           type="number"
-          placeholder="Dĺžka"
+          placeholder="Length"
           required
         />
         <input
           v-model.number="inputs.width"
           @input="emitInputs"
           type="number"
-          placeholder="Šírka"
+          placeholder="Width"
           required
         />
         <input
           v-model.number="inputs.height"
           @input="emitInputs"
           type="number"
-          placeholder="Výška"
+          placeholder="Height"
           required
         />
       </div>
@@ -58,9 +58,6 @@ export default {
 <style scoped>
 /* https://blog.logrocket.com/style-forms-css/ */
 form {
-  /* margin: 50px;
-  padding: 50px; */
-  /* border: solid; */
   display: flex;
   flex-direction: row;
   align-items: center;

@@ -17,7 +17,7 @@ const errorMessage = ref('')
 
 const downloadFile = async () => {
   if (!props.formValid) {
-    errorMessage.value = 'Ferenc, Vyplň vsetky rozmery!'
+    errorMessage.value = 'Please Fill All Dimensions!'
     return
   }
   try {
@@ -33,7 +33,7 @@ const downloadFile = async () => {
     <!-- Error message -->
     <p v-show="!formValid" class="error-message">{{ errorMessage }}</p>
     <button class="btn-primary" :class="{ ready: formValid }" @click="downloadFile">
-      Stiahnuť
+      Download
     </button>
   </div>
 </template>

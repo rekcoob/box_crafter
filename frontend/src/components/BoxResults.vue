@@ -14,7 +14,7 @@ const calculateFormat = () => {
   const { length, width, height } = props.results
   const { thickn, boxStyle } = props
 
-  // Flap Height Depending on Material Thickness
+  // Calculate flap height based on material thickness
   let flapHeight
   if (thickn === 5) {
     flapHeight = width / 2 + 4
@@ -24,7 +24,8 @@ const calculateFormat = () => {
     flapHeight = width / 2 + 1
   }
 
-  // Format Calculation Depending on Box Style
+  // Blank Size Calculation based on Box Style and thickness
+  // +38 = 40 glueFlap and -2 from length
   const boxLength = length + width + thickn * 2
   let format
   switch (boxStyle) {
@@ -60,13 +61,12 @@ const getMat = () => {
   <div class="">
     <div class="results" :style="{ opacity: formValid ? 1 : 0 }">
       <p>
-        <strong>Vonkajšie rozmery krabice {{ getMat() }}</strong>
+        <strong>Outer Dimensions {{ getMat() }}</strong>
       </p>
-      <p>Dĺžka: {{ results.length + thickn * 2 }}</p>
-      <p>Šírka: {{ results.width + thickn * 2 }}</p>
-      <p>Výška: {{ results.height + thickn * 4 }}</p>
-      <!-- +40 zalozka a -2 z length2 -->
-      <p><strong>Formát: </strong>{{ calculateFormat() }}</p>
+      <p>Length: {{ results.length + thickn * 2 }}</p>
+      <p>Width: {{ results.width + thickn * 2 }}</p>
+      <p>Height: {{ results.height + thickn * 4 }}</p>
+      <p><strong>Format: </strong>{{ calculateFormat() }}</p>
     </div>
   </div>
 </template>
@@ -74,7 +74,6 @@ const getMat = () => {
 <style scoped>
 .results {
   padding: 50px;
-  /* border: solid; */
   transition: opacity 2s ease-in-out;
 }
 </style>

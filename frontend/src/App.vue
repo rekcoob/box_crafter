@@ -44,7 +44,7 @@ const updateSelectedOption = (option) => {
 </script>
 
 <template>
-  <h2>BigBox Crafter</h2>
+  <h2>Box Crafter</h2>
 
   <div class="container">
     <div class="inputs">
@@ -73,8 +73,6 @@ const updateSelectedOption = (option) => {
 .input-section {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /*border: solid;*/
 }
 .inputs {
   display: flex;
