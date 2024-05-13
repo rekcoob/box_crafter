@@ -17,7 +17,6 @@ const errorMessage = ref('')
 const downloadFile = async () => {
   if (!props.formValid) {
     errorMessage.value = 'Please Fill All Dimensions!'
-    console.log(' failed')
     return
   }
   try {
