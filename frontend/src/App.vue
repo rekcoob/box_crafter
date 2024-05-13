@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import MaterialButtons from '@/components/MaterialButtons.vue'
 import DimensionsInput from '@/components/DimensionsInput.vue'
+
 import BoxStyles from '@/components/BoxStyles.vue'
 import BoxResults from '@/components/BoxResults.vue'
 import DownloadBtn from '@/components/DownloadBtn.vue'
@@ -44,22 +45,23 @@ const updateSelectedOption = (option) => {
 </script>
 
 <template>
-  <h2>Box Crafter</h2>
-
   <div class="container">
-    <div class="inputs">
-      <div class="input-section">
+    <h2>Box Crafter</h2>
+    <div class="flex center selfcenter">
+      <div class="flex-col">
         <MaterialButtons @thicknChanged="handleThicknChange" />
         <DimensionsInput @inputsChanged="handleInputsChange" />
       </div>
       <BoxStyles @optionSelected="updateSelectedOption" />
     </div>
+
     <DownloadBtn
       :results="processedInputs"
       :thickn="thickn"
       :boxStyle="boxStyle"
       :formValid="formValid"
     />
+
     <BoxResults
       :results="processedInputs"
       :thickn="thickn"
@@ -70,11 +72,13 @@ const updateSelectedOption = (option) => {
 </template>
 
 <style scoped>
-.input-section {
-  display: flex;
-  flex-direction: column;
+.selfcenter {
+  justify-content: space-evenly;
 }
-.inputs {
-  display: flex;
+/* For screens smaller than or equal to 767px (i.e., mobile phone size) */
+@media (max-width: 767px) {
+  .flex {
+    flex-direction: column;
+  }
 }
 </style>

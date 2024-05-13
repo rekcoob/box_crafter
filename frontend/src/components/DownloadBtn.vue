@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { downloadFile as downloadFileService } from '@/services/downloadFile'
 
-// const { results, thickn, boxStyle, formValid } = defineProps({
 const props = defineProps({
   results: {
     length: Number,
@@ -18,6 +17,7 @@ const errorMessage = ref('')
 const downloadFile = async () => {
   if (!props.formValid) {
     errorMessage.value = 'Please Fill All Dimensions!'
+    console.log(' failed')
     return
   }
   try {
@@ -29,7 +29,7 @@ const downloadFile = async () => {
 </script>
 
 <template>
-  <div class="container">
+  <div class="download_section flex-col border">
     <!-- Error message -->
     <p v-show="!formValid" class="error-message">{{ errorMessage }}</p>
     <button class="btn-primary" :class="{ ready: formValid }" @click="downloadFile">
@@ -39,6 +39,10 @@ const downloadFile = async () => {
 </template>
 
 <style scoped>
+.download_section {
+  position: relative;
+}
+
 button {
   display: inline-block;
   margin: 10px 0;
@@ -66,9 +70,6 @@ button {
   color: #fff;
 }
 
-.container {
-  position: relative;
-}
 .error-message {
   position: absolute;
   top: 0;

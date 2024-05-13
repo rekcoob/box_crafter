@@ -24,8 +24,8 @@ const calculateFormat = () => {
     flapHeight = width / 2 + 1
   }
 
-  // Blank Size Calculation based on Box Style and thickness
-  // +38 = 40 glueFlap and -2 from length
+  // Blank Size Format Calculation based on Box Style and Thickness
+  // +38 = 40 for glueFlap and -2 from length at the end
   const boxLength = length + width + thickn * 2
   let format
   switch (boxStyle) {
@@ -58,21 +58,19 @@ const getMat = () => {
 </script>
 
 <template>
-  <div class="">
-    <div class="results" :style="{ opacity: formValid ? 1 : 0 }">
-      <p>
-        <strong>Outer Dimensions {{ getMat() }}</strong>
-      </p>
-      <p>Length: {{ results.length + thickn * 2 }}</p>
-      <p>Width: {{ results.width + thickn * 2 }}</p>
-      <p>Height: {{ results.height + thickn * 4 }}</p>
-      <p><strong>Format: </strong>{{ calculateFormat() }}</p>
-    </div>
+  <div class="results_section border" :style="{ opacity: formValid ? 1 : 0 }">
+    <p>
+      <strong>Outer Dimensions {{ getMat() }}</strong>
+    </p>
+    <p>Length: {{ results.length + thickn * 2 }}</p>
+    <p>Width: {{ results.width + thickn * 2 }}</p>
+    <p>Height: {{ results.height + thickn * 4 }}</p>
+    <p><strong>Format: </strong>{{ calculateFormat() }}</p>
   </div>
 </template>
 
 <style scoped>
-.results {
+.results_section {
   padding: 50px;
   transition: opacity 2s ease-in-out;
 }

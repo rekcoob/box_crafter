@@ -48,17 +48,17 @@ const options = {
 </script>
 
 <template>
-  <div class="boxstyles">
+  <div class="boxstyles_section border">
     <h3>Box Style</h3>
-    <div class="custom-select-wrapper">
-      <select v-model="selectedOption" @change="sendSelectedOption" class="custom-select">
-        <option value="box">box</option>
-        <option value="box-open">box open</option>
-        <option value="half">half</option>
-        <option value="half-open">half open</option>
-        <!-- <option value="box-q">test</option> -->
-      </select>
-    </div>
+
+    <select v-model="selectedOption" @change="sendSelectedOption" class="custom-select">
+      <option value="box">box</option>
+      <option value="box-open">box open</option>
+      <option value="half">half</option>
+      <option value="half-open">half open</option>
+      <!-- <option value="box-q">test</option> -->
+    </select>
+
     <div v-if="selectedOption">
       <p>{{ options[selectedOption].label }}</p>
       <p><b>FEFCO Code:</b> {{ options[selectedOption].fefcoCode }}</p>
@@ -68,8 +68,8 @@ const options = {
 </template>
 
 <style scoped>
-.boxstyles {
-  margin: 40px;
+.boxstyles_section {
+  padding: 40px;
 }
 img {
   width: 500px; /* Adjust the width as per your requirement */

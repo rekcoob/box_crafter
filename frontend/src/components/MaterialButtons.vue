@@ -22,9 +22,9 @@ const switchActive = (n) => {
 </script>
 
 <template>
-  <div class="material">
+  <div class="material_section flex-col center border">
     <h3>Material</h3>
-    <div class="craft">
+    <div class="flex">
       <button class="btn-primary" :class="{ active: mat === 1 }" @click="switchActive(1)">B</button>
       <button class="btn-primary" :class="{ active: mat === 2 }" @click="switchActive(2)">C</button>
       <button class="btn-primary" :class="{ active: mat === 3 }" @click="switchActive(3)">
@@ -36,15 +36,10 @@ const switchActive = (n) => {
 </template>
 
 <style scoped>
-.material {
-  /* margin: 50px;
-  padding: 50px; */
-  /* border: solid; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.material_section {
+  margin: 30px 0px;
 }
+
 button {
   /* display: inline-block; */
   margin: 10px 0;
@@ -70,8 +65,5 @@ button {
 .active {
   background-color: #0056b3;
   color: #fff;
-}
-.quality {
-  margin: 30px 0px;
 }
 </style>

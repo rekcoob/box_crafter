@@ -1,31 +1,27 @@
-<script>
-export default {
-  data() {
-    return {
-      inputs: {
-        length: null,
-        width: null,
-        height: null
-      },
-      formValid: false
-    }
-  },
-  methods: {
-    emitInputs() {
-      // Set formValid to True when all 3 inputs are filled
-      this.formValid =
-        this.inputs.length !== null && this.inputs.width !== null && this.inputs.height !== null
+<script setup>
+import { ref, defineEmits } from 'vue'
 
-      // Emit object | 1.argument = method name, 2.arg = payload
-      // this.$emit('inputsChanged',  inputs: this.inputs)
-      this.$emit('inputsChanged', { inputs: this.inputs, formValid: this.formValid })
-    }
-  }
+const inputs = ref({
+  length: null,
+  width: null,
+  height: null
+})
+const formValid = ref(false)
+const emit = defineEmits(['inputsChanged'])
+
+const emitInputs = () => {
+  // Set formValid to true when all 3 inputs are filled
+  formValid.value =
+    inputs.value.length !== null && inputs.value.width !== null && inputs.value.height !== null
+
+  // Emit object | 1st argument = event name, 2nd arg = payload
+
+  emit('inputsChanged', { inputs: inputs.value, formValid: formValid.value })
 }
 </script>
 
 <template>
-  <div class="">
+  <div class="dimensions_section border">
     <form>
       <div class="form-group">
         <h3>Inner Dimensions</h3>
@@ -56,19 +52,8 @@ export default {
 </template>
 
 <style scoped>
-/* https://blog.logrocket.com/style-forms-css/ */
-form {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-.form-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 15px;
+.dimensions_section {
+  padding: 15px;
 }
 
 input[type='number'] {
@@ -91,7 +76,6 @@ input[type='number']:focus {
 input[type='number']:disabled {
   border: 1px solid grey;
   opacity: 0.5;
-
   cursor: not-allowed;
 }
 
@@ -106,30 +90,5 @@ input[type='number'] {
   -moz-appearance: textfield;
   /* Chrome, Safari, Edge */
   appearance: textfield;
-}
-button {
-  display: inline-block;
-  margin: 10px 0;
-  padding: 0.75em 1.25em;
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 0.25em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.btn-primary {
-  background-color: #181a1b;
-  color: #1e84ff;
-  border: 1px solid #007bff;
-}
-.btn-primary:hover {
-  border-color: #0056b3;
-  box-shadow: 0 0 10px #0062cc;
-}
-.active {
-  background-color: #0056b3;
-  color: #fff;
 }
 </style>

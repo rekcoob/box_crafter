@@ -31,7 +31,9 @@ coverage
 
 # Added
 .env
-toDos.md
 .env.production
 .env.development
+
+toDos.md
+xchatGPT.md
 
