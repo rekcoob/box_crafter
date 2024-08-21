@@ -40,6 +40,7 @@ const downloadFile = async () => {
 <style scoped>
 .download_section {
   position: relative;
+  margin: 0 20px;
 }
 
 button {

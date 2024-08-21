@@ -59,19 +59,25 @@ const getMat = () => {
 
 <template>
   <div class="results_section border" :style="{ opacity: formValid ? 1 : 0 }">
-    <p>
-      <strong>Outer Dimensions {{ getMat() }}</strong>
-    </p>
-    <p>Length: {{ results.length + thickn * 2 }}</p>
-    <p>Width: {{ results.width + thickn * 2 }}</p>
-    <p>Height: {{ results.height + thickn * 4 }}</p>
-    <p><strong>Format: </strong>{{ calculateFormat() }}</p>
+    <h3>Outer Dimensions</h3>
+
+    <p>Length: {{ results.length + thickn * 2 }} mm</p>
+    <p>Width: {{ results.width + thickn * 2 }} mm</p>
+    <p>Height: {{ results.height + thickn * 4 }} mm</p>
+    <br />
+    <p>Material: {{ getMat() }}</p>
+    <br />
+    <p><strong>Format: </strong>{{ calculateFormat() }} mm</p>
   </div>
 </template>
 
 <style scoped>
 .results_section {
-  padding: 50px;
+  padding: 20px 50px;
   transition: opacity 2s ease-in-out;
+}
+
+h3 {
+  margin-bottom: 10px;
 }
 </style>

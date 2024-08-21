@@ -47,6 +47,7 @@ const updateSelectedOption = (option) => {
 <template>
   <div class="container">
     <h2>Box Crafter</h2>
+    <p>Converting Box Dimensions into a DXF Design</p>
     <div class="flex center selfcenter">
       <div class="flex-col">
         <MaterialButtons @thicknChanged="handleThicknChange" />
@@ -72,8 +73,20 @@ const updateSelectedOption = (option) => {
 </template>
 
 <style scoped>
+.container {
+  /* min-height: 100vh; */
+  max-width: 1000px;
+  margin: auto;
+}
+
 .selfcenter {
   justify-content: space-evenly;
+}
+h2 {
+  margin: 20px;
+}
+p {
+  margin: 15px;
 }
 /* For screens smaller than or equal to 767px (i.e., mobile phone size) */
 @media (max-width: 767px) {

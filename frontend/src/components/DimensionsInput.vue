@@ -24,7 +24,7 @@ const emitInputs = () => {
   <div class="dimensions_section border">
     <form>
       <div class="form-group">
-        <h3>Inner Dimensions</h3>
+        <h3>Inner Dimensions (mm)</h3>
         <input
           v-model.number="inputs.length"
           @input="emitInputs"

@@ -79,7 +79,8 @@ img {
 .custom-select {
   display: block;
   width: 100%;
-  padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+  /* margin: 5px 10px; */
+  padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
   color: inherit;
@@ -99,5 +100,11 @@ img {
 .custom-select option {
   background-color: #333;
   color: #fff;
+}
+h3 {
+  margin: 10px;
+}
+p {
+  margin: 10px;
 }
 </style>
