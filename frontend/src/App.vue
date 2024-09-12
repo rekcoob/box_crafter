@@ -2,7 +2,6 @@
 import { ref, computed } from 'vue'
 import MaterialButtons from '@/components/MaterialButtons.vue'
 import DimensionsInput from '@/components/DimensionsInput.vue'
-
 import BoxStyles from '@/components/BoxStyles.vue'
 import BoxResults from '@/components/BoxResults.vue'
 import DownloadBtn from '@/components/DownloadBtn.vue'
