@@ -1,38 +1,76 @@
+// Core Node.js Modules
 import express, { Request, Response } from 'express'
-import cors from 'cors'
 import path from 'path'
 
-const app = express()
-const PORT = 5000
+// Third Party Modules
+import cors from 'cors'
+import dotenv from 'dotenv'
 
-// Middleware
+// Custom Modules
+import { generateBox } from './box'
+import { generateBoxOpen } from './box_open'
+import { generateHalf } from './half'
+import { generateHalfOpen } from './half_open'
+import { generateBoxQ } from './box_q'
+
+// Constants and Configuration
+dotenv.config()
+const port = process.env.PORT || 5000
+
+// Initialize and Configure External Modules
+const app = express()
 app.use(express.json())
 app.use(cors())
 
 // Serve static files from the frontend build directory
 app.use(express.static(path.join(__dirname, '../../frontend/dist')))
 
-interface Person {
-  id: number
-  name: string
-}
-
-const data: Person[] = [
-  { id: 1, name: 'John' },
-  { id: 2, name: 'Bob' },
-  { id: 3, name: 'Fred' },
-]
-
-// Routes
-app.get('/', (req: Request, res: Response) => {
-  res.send('API is running')
+// POST /dxf Generate Regular Slotted Box
+app.post('/dxf', (req: Request, res: Response) => {
+  const { l, w, h, t } = req.body
+  // Generate DXF
+  const dxfString = generateBoxOpen(l, w, h, t)
+  // For simplicity, you can just send the file content as a response
+  // In a real-world scenario, you might save the file and send its URL
+  // res.send({ fileContent: dxfString })
+  res.send(dxfString)
 })
 
-app.get('/api', (req: Request, res: Response) => {
-  res.json(data)
+// Generate Regular Slotted Box
+app.post('/dxf/box', (req: Request, res: Response) => {
+  const { l, w, h, t } = req.body
+  const dxfString = generateBox(l, w, h, t)
+  res.send(dxfString)
 })
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`)
+// Generate Open Box
+app.post('/dxf/box-open', (req: Request, res: Response) => {
+  const { l, w, h, t } = req.body
+  const dxfString = generateBoxOpen(l, w, h, t)
+  res.send(dxfString)
+})
+
+// Generate Half Box
+app.post('/dxf/half', (req: Request, res: Response) => {
+  const { l, w, h, t } = req.body
+  const dxfString = generateHalf(l, w, h, t)
+  res.send(dxfString)
+})
+
+// Generate Open Half Box
+app.post('/dxf/half-open', (req: Request, res: Response) => {
+  const { l, w, h, t } = req.body
+  const dxfString = generateHalfOpen(l, w, h, t)
+  res.send(dxfString)
+})
+
+// Generate Box-Q
+app.post('/dxf/box-q', (req: Request, res: Response) => {
+  const { l, w, h, t } = req.body
+  const dxfString = generateBoxQ(l, w, h, t)
+  res.send(dxfString)
+})
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`)
 })
