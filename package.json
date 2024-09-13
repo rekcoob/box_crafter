@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node backend/server.ts",
-    "server": "nodemon backend/server.ts",
-    "client": "cd frontend && npm run dev",
+    "start": "node ./dist/backend/server.js",
+    "server": "nodemon ./dist/backend/server.js",
+    "client": "npm run --prefix frontend dev",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "npm install && cd frontend && npm install && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "tsc -w",
+    "build-server": "tsc",
+    "build-client": "npm install --prefix frontend && npm run --prefix frontend build",
+    "build": "tsc && npm run build-client"
   },
   "keywords": [],
   "author": "",
