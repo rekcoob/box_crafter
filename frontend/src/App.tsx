@@ -1,39 +1,77 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useState, useMemo } from 'react'
 import './App.css'
+import MaterialButtons from './components/MaterialButtons' // Adjust the path based on your project structure
+import DimensionsInput from './components/DimensionsInput'
+import BoxStyles from './components/BoxStyles'
+import BoxResults from './components/BoxResults'
+import DownloadBtn from './components/DownloadBtn'
 
-interface Item {
-  id: number
-  name: string
+interface Inputs {
+  length: number | null
+  width: number | null
+  height: number | null
 }
 
-function App() {
-  const [items, setItems] = useState<Item[]>([])
+const BoxCrafter: React.FC = () => {
+  const [inputs, setInputs] = useState<Inputs>({
+    length: null,
+    width: null,
+    height: null,
+  })
+  const [thickn, setThickn] = useState<number>(5)
+  const [boxStyle, setBoxStyle] = useState<string>('box')
+  const [formValid, setFormValid] = useState<boolean>(false)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/api')
-        setItems(response.data)
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
+  // Memoized processed inputs, swaps width and length if width > length
+  const processedInputs = useMemo(() => {
+    const { length, width, height } = inputs
+    if (width !== null && length !== null && width > length) {
+      return { length: width, width: length, height }
     }
-    fetchData()
-  }, [])
+    return inputs
+  }, [inputs])
+
+  // Handlers for child components
+  const handleInputsChange = (data: { inputs: Inputs; formValid: boolean }) => {
+    setInputs(data.inputs)
+    setFormValid(data.formValid)
+  }
+
+  const handleThicknChange = (t: number) => {
+    setThickn(t)
+  }
+
+  const updateSelectedOption = (option: string) => {
+    setBoxStyle(option)
+  }
 
   return (
-    <>
-      <div>
-        <h1>Array Data</h1>
-        <ul>
-          {items.map((item) => (
-            <li key={item.id}>{item.name}</li>
-          ))}
-        </ul>
+    <div className='container'>
+      <h2>Box Crafter</h2>
+      <p>Converting Box Dimensions into a DXF Design</p>
+      <div className='flex center selfcenter'>
+        <div className='flex-col'>
+          <MaterialButtons onThicknChanged={handleThicknChange} />
+          <DimensionsInput onInputsChanged={handleInputsChange} />
+        </div>
+        <BoxStyles onOptionSelected={updateSelectedOption} />
       </div>
-    </>
+
+      <DownloadBtn
+        results={processedInputs}
+        thickn={thickn}
+        boxStyle={boxStyle}
+        formValid={formValid}
+      />
+
+      <BoxResults
+        results={processedInputs}
+        thickn={thickn}
+        boxStyle={boxStyle}
+        formValid={formValid}
+      />
+    </div>
   )
 }
 
-export default App
+export default BoxCrafter
