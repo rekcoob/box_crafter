@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import styles from './DimensionsInput.module.css'
 
 interface Inputs {
   length: number | null
@@ -6,11 +7,14 @@ interface Inputs {
   height: number | null
 }
 
+// interface Props {
+//   onInputsChanged: (data: { inputs: Inputs; formValid: boolean }) => void
+// }
 interface Props {
-  onInputsChanged: (data: { inputs: Inputs; formValid: boolean }) => void
+  onInputsChanged: (inputs: { inputs: Inputs; formValid: boolean }) => void
 }
 
-const DimensionsForm: React.FC<Props> = ({ onInputsChanged }) => {
+const DimensionsInput: React.FC<Props> = ({ onInputsChanged }) => {
   const [inputs, setInputs] = useState<Inputs>({
     length: null,
     width: null,
@@ -18,24 +22,26 @@ const DimensionsForm: React.FC<Props> = ({ onInputsChanged }) => {
   })
   const [formValid, setFormValid] = useState<boolean>(false)
 
-  const emitInputs = () => {
+  useEffect(() => {
+    // Validate form when any of the inputs change
     const isFormValid =
       inputs.length !== null && inputs.width !== null && inputs.height !== null
     setFormValid(isFormValid)
-    onInputsChanged({ inputs, formValid: isFormValid })
-  }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Emit inputs and form validity to the parent
+    onInputsChanged({ inputs, formValid: isFormValid })
+  }, [inputs, onInputsChanged])
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setInputs({
-      ...inputs,
-      [name]: value ? Number(value) : null, // Ensure the value is treated as a number or null
-    })
-    emitInputs()
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      [name]: value ? parseFloat(value) : null,
+    }))
   }
 
   return (
-    <div className='dimensions_section border'>
+    <div className={styles.dimensionsSection}>
       <form>
         <div className='form-group'>
           <h3>Inner Dimensions (mm)</h3>
@@ -43,7 +49,7 @@ const DimensionsForm: React.FC<Props> = ({ onInputsChanged }) => {
             name='length'
             type='number'
             value={inputs.length ?? ''}
-            onChange={handleChange}
+            onChange={handleInputChange}
             placeholder='Length'
             required
           />
@@ -51,7 +57,7 @@ const DimensionsForm: React.FC<Props> = ({ onInputsChanged }) => {
             name='width'
             type='number'
             value={inputs.width ?? ''}
-            onChange={handleChange}
+            onChange={handleInputChange}
             placeholder='Width'
             required
           />
@@ -59,7 +65,7 @@ const DimensionsForm: React.FC<Props> = ({ onInputsChanged }) => {
             name='height'
             type='number'
             value={inputs.height ?? ''}
-            onChange={handleChange}
+            onChange={handleInputChange}
             placeholder='Height'
             required
           />
@@ -69,4 +75,4 @@ const DimensionsForm: React.FC<Props> = ({ onInputsChanged }) => {
   )
 }
 
-export default DimensionsForm
+export default DimensionsInput

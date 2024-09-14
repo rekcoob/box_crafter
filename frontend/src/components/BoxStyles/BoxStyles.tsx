@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import boxImage from '../assets/images/box.jpg'
-import boxOpenImage from '../assets/images/box-open.jpg'
-import halfImage from '../assets/images/half.jpg'
-import halfOpenImage from '../assets/images/half-open.jpg'
-import boxQImage from '../assets/images/box-q.jpg'
+import styles from './BoxStyles.module.css'
+import boxImage from '../../assets/images/box.jpg'
+import boxOpenImage from '../../assets/images/box-open.jpg'
+import halfImage from '../../assets/images/half.jpg'
+import halfOpenImage from '../../assets/images/half-open.jpg'
+// import boxQImage from '../../assets/images/box-q.jpg'
 
 interface Option {
   label: string
@@ -48,12 +49,12 @@ const BoxStyles: React.FC<Props> = ({ onOptionSelected }) => {
       image: halfOpenImage,
       alt: 'half-open',
     },
-    'box-q': {
-      label: 'Testing Box-Q',
-      fefcoCode: '0200',
-      image: boxQImage,
-      alt: 'box-q',
-    },
+    // 'box-q': {
+    //   label: 'Testing Box-Q',
+    //   fefcoCode: '0200',
+    //   image: boxQImage,
+    //   alt: 'box-q',
+    // },
   }
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -62,33 +63,31 @@ const BoxStyles: React.FC<Props> = ({ onOptionSelected }) => {
     onOptionSelected(selected)
   }
 
+  const { label, fefcoCode, image, alt } = options[selectedOption]
+
   return (
-    <div className='boxstyles_section border'>
-      <h3>Box Style</h3>
+    <div className={styles.boxStylesSection}>
+      <h3 className={styles.heading}>Box Style</h3>
 
       <select
         value={selectedOption}
         onChange={handleOptionChange}
-        className='custom-select'
+        className={styles.customSelect}
       >
-        <option value='box'>box</option>
-        <option value='box-open'>box open</option>
-        <option value='half'>half</option>
-        <option value='half-open'>half open</option>
-        {/* <option value="box-q">test</option> */}
+        {Object.keys(options).map((key) => (
+          <option key={key} value={key}>
+            {key.replace('-', ' ')}
+          </option>
+        ))}
       </select>
 
       {selectedOption && (
         <div>
-          <p>{options[selectedOption].label}</p>
-          <p>
-            <b>FEFCO Code:</b> {options[selectedOption].fefcoCode}
+          <p>{label}</p>
+          <p className={styles.paragraph}>
+            <b>FEFCO Code:</b> {fefcoCode}
           </p>
-          <img
-            src={options[selectedOption].image}
-            alt={options[selectedOption].alt}
-            style={{ width: '500px', height: 'auto' }}
-          />
+          <img src={image} alt={alt} className={styles.img} />
         </div>
       )}
     </div>

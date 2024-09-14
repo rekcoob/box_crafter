@@ -1,0 +1,9 @@
+.resultsSection {
+  padding: 20px 50px;
+  transition: opacity 2s ease-in-out;
+}
+
+.heading {
+  color: green;
+  margin-bottom: 10px;
+}

@@ -5,6 +5,13 @@
   padding: 0;
 }
 
+body {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 18px;
+  background: var(--dark-color);
+  color: var(--text-color);
+}
+
 /* Color Scheme */
 :root {
   --primary-color: #0056b3;
@@ -17,31 +24,15 @@
 .primary {
   color: var(--primary-color);
 }
-
-body {
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 18px;
-  background: var(--dark-color);
-  color: var(--text-color);
-}
-
 a {
   text-decoration: none;
   color: var(--text-color);
 }
-
 ul {
   list-style: none;
 }
-
 img {
   max-width: 100%;
-}
-
-/* Custom Settings Repeatable Fur Multiple Components*/
-h1,
-h2,
-h3 {
 }
 
 /* Css Framework Utils Classes */
@@ -52,12 +43,10 @@ h3 {
   display: flex;
   flex-direction: column;
 }
-
 .center {
   align-items: center;
   justify-content: center;
 }
-
 .border {
   border: none;
 }

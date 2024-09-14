@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './BoxResults.module.css'
 
 interface Props {
   results: {
@@ -31,6 +32,7 @@ const BoxResults: React.FC<Props> = ({
     }
 
     // Blank Size Format Calculation based on Box Style and Thickness
+    // +38 = 40 for glueFlap and -2 from length at the end
     const boxLength = length + width + thickn * 2
     let format: string
     switch (boxStyle) {
@@ -64,10 +66,10 @@ const BoxResults: React.FC<Props> = ({
 
   return (
     <div
-      className='results_section border'
+      className={styles.resultsSection}
       style={{ opacity: formValid ? 1 : 0 }}
     >
-      <h3>Outer Dimensions</h3>
+      <h3 className={styles.heading}>Outer Dimensions</h3>
 
       <p>Length: {results.length + thickn * 2} mm</p>
       <p>Width: {results.width + thickn * 2} mm</p>

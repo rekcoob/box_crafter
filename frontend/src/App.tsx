@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react'
 import './App.css'
-import MaterialButtons from './components/MaterialButtons' // Adjust the path based on your project structure
-import DimensionsInput from './components/DimensionsInput'
-import BoxStyles from './components/BoxStyles'
-import BoxResults from './components/BoxResults'
-import DownloadBtn from './components/DownloadBtn'
+import MaterialButtons from './components/MaterialButtons/MaterialButtons' // Adjust the path based on your project structure
+import DimensionsInput from './components/DimensionsInput/DimensionsInput'
+import BoxStyles from './components/BoxStyles/BoxStyles'
+import BoxResults from './components/BoxResults/BoxResults'
+import DownloadBtn from './components/DownloadBtn/DownloadBtn'
 
 interface Inputs {
   length: number | null
@@ -48,7 +48,7 @@ const BoxCrafter: React.FC = () => {
   return (
     <div className='container'>
       <h2>Box Crafter</h2>
-      <p>Converting Box Dimensions into a DXF Design</p>
+      {/* <p>Converting Box Dimensions into a DXF Design</p> */}
       <div className='flex center selfcenter'>
         <div className='flex-col'>
           <MaterialButtons onThicknChanged={handleThicknChange} />

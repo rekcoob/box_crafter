@@ -1,0 +1,39 @@
+.dimensionsSection {
+  padding: 15px;
+}
+
+input[type='number'] {
+  background-color: #181a1b;
+  color: #e8e6e3;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 6px 0;
+  box-sizing: border-box;
+  border: 1px solid #0062cc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  border-radius: 0.25rem;
+  /* outline: none; */
+}
+input[type='number']:focus {
+  border: 1px solid #0062cc;
+  box-shadow: 0 0 20px #0062cc;
+}
+input[type='number']:disabled {
+  border: 1px solid grey;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Hide the spin box for number input */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  /* Firefox */
+  -moz-appearance: textfield;
+  /* Chrome, Safari, Edge */
+  appearance: textfield;
+}

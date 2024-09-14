@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { downloadFile as downloadFileService } from '../services/downloadFile'
+import styles from './DownloadBtn.module.css'
+import { downloadFile as downloadFileService } from '../../services/downloadFile'
 
 interface Props {
   results: {
@@ -12,7 +13,7 @@ interface Props {
   formValid: boolean
 }
 
-const DownloadSection: React.FC<Props> = ({
+const DownloadBtn: React.FC<Props> = ({
   results,
   thickn,
   boxStyle,
@@ -33,11 +34,11 @@ const DownloadSection: React.FC<Props> = ({
   }
 
   return (
-    <div className='download_section flex-col border'>
+    <div className={`${styles.downloadSection} flex-col`}>
       {/* Error message */}
       {!formValid && <p className='error-message'>{errorMessage}</p>}
       <button
-        className={`btn-primary ${formValid ? 'ready' : ''}`}
+        className={`${styles.btnPrimary} ${formValid ? styles.ready : ''}`}
         onClick={downloadFile}
       >
         Download
@@ -46,4 +47,4 @@ const DownloadSection: React.FC<Props> = ({
   )
 }
 
-export default DownloadSection
+export default DownloadBtn
