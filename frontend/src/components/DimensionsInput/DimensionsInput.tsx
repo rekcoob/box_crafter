@@ -9,9 +9,9 @@ const DimensionsInput: React.FC = () => {
 
   // Function to validate the form
   const validateForm = (dimensions: {
-    length: number | null
-    width: number | null
-    height: number | null
+    length: number
+    width: number
+    height: number
   }) => {
     const { length, width, height } = dimensions
     const isValid =
@@ -49,7 +49,8 @@ const DimensionsInput: React.FC = () => {
           <input
             name='length'
             type='number'
-            value={dimensions.length ?? ''} // Use empty string if null
+            // value={dimensions.length ?? ''} // Use empty string if null
+            value={dimensions.length === 0 ? '' : dimensions.length} // Conditionally display empty string
             onChange={handleInputChange}
             placeholder='Length'
             required
@@ -57,7 +58,7 @@ const DimensionsInput: React.FC = () => {
           <input
             name='width'
             type='number'
-            value={dimensions.width ?? ''} // Use empty string if null
+            value={dimensions.width === 0 ? '' : dimensions.width}
             onChange={handleInputChange}
             placeholder='Width'
             required
@@ -65,7 +66,7 @@ const DimensionsInput: React.FC = () => {
           <input
             name='height'
             type='number'
-            value={dimensions.height ?? ''} // Use empty string if null
+            value={dimensions.height === 0 ? '' : dimensions.height}
             onChange={handleInputChange}
             placeholder='Height'
             required

@@ -40,38 +40,6 @@ export async function downloadFile(
     apiUrl = `http://localhost:5000/dxf/${boxStyle}`
   }
 
-  //   try {
-  //     const response = await axios.post(
-  //       apiUrl,
-  //       {
-  //         length,
-  //         width,
-  //         height,
-  //         thickness: thickn,
-  //       },
-  //       { responseType: 'blob' }
-  //     )
-
-  //     // Trigger file download
-  //     triggerFileDownload(response.data, filename)
-
-  //   } catch {
-  //     throw new Error('Failed to download file. Please try again.')
-  //   }
-  // }
-
-  // // Utility function to handle file download
-  // function triggerFileDownload(blobData: Blob, filename: string) {
-  //   const url = window.URL.createObjectURL(new Blob([blobData]))
-  //   const link = document.createElement('a')
-  //   link.href = url
-  //   link.setAttribute('download', filename)
-  //   document.body.appendChild(link)
-  //   link.click()
-  //   document.body.removeChild(link)
-  //   window.URL.revokeObjectURL(url)
-  // }
-
   try {
     const response = await axios.post(
       apiUrl,
