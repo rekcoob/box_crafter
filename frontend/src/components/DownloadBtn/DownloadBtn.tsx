@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import styles from './DownloadBtn.module.css'
+import { useThickness } from '../../context/ThicknessContext'
+import { useFormValid } from '../../context/FormValidContext'
 import { downloadFile as downloadFileService } from '../../services/downloadFile'
 
 interface Props {
@@ -8,17 +10,12 @@ interface Props {
     width: number
     height: number
   }
-  thickn: number
   boxStyle: string
-  formValid: boolean
 }
 
-const DownloadBtn: React.FC<Props> = ({
-  results,
-  thickn,
-  boxStyle,
-  formValid,
-}) => {
+const DownloadBtn: React.FC<Props> = ({ results, boxStyle }) => {
+  const { thickness } = useThickness()
+  const { formValid } = useFormValid()
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   const downloadFile = async () => {
@@ -27,7 +24,7 @@ const DownloadBtn: React.FC<Props> = ({
       return
     }
     try {
-      await downloadFileService(results, thickn, boxStyle)
+      await downloadFileService(results, thickness, boxStyle)
     } catch (err) {
       console.error('Error downloading file:', err)
     }

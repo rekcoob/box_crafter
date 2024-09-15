@@ -1,5 +1,7 @@
 import React from 'react'
 import styles from './BoxResults.module.css'
+import { useThickness } from '../../context/ThicknessContext'
+import { useFormValid } from '../../context/FormValidContext'
 
 interface Props {
   results: {
@@ -9,47 +11,48 @@ interface Props {
   }
   thickn: number
   boxStyle: string
-  formValid: boolean
 }
 
-const BoxResults: React.FC<Props> = ({
-  results,
-  thickn,
-  boxStyle,
-  formValid,
-}) => {
+const BoxResults: React.FC<Props> = ({ results, boxStyle }) => {
+  const { thickness } = useThickness()
+  const { formValid } = useFormValid()
+
   const calculateFormat = () => {
     const { length, width, height } = results
 
     // Calculate flap height based on material thickness
     let flapHeight
-    if (thickn === 5) {
+    if (thickness === 5) {
       flapHeight = width / 2 + 4
-    } else if (thickn === 4) {
+    } else if (thickness === 4) {
       flapHeight = width / 2 + 2
     } else {
       flapHeight = width / 2 + 1
     }
 
-    // Blank Size Format Calculation based on Box Style and Thickness
+    // Blank Size Format Calculation based on Box Style and Thicknessess
     // +38 = 40 for glueFlap and -2 from length at the end
-    const boxLength = length + width + thickn * 2
+    const boxLength = length + width + thickness * 2
     let format: string
     switch (boxStyle) {
       case 'box':
-        format = `${boxLength * 2 + 38} x ${height + (thickn + flapHeight) * 2}`
+        format = `${boxLength * 2 + 38} x ${
+          height + (thickness + flapHeight) * 2
+        }`
         break
       case 'box-open':
-        format = `${boxLength * 2 + 38} x ${height + thickn + flapHeight}`
+        format = `${boxLength * 2 + 38} x ${height + thickness + flapHeight}`
         break
       case 'half':
-        format = `${boxLength + 40} x ${height + (thickn + flapHeight) * 2}`
+        format = `${boxLength + 40} x ${height + (thickness + flapHeight) * 2}`
         break
       case 'half-open':
-        format = `${boxLength + 40} x ${height + thickn + flapHeight}`
+        format = `${boxLength + 40} x ${height + thickness + flapHeight}`
         break
       default:
-        format = `${boxLength * 2 + 38} x ${height + (thickn + flapHeight) * 2}`
+        format = `${boxLength * 2 + 38} x ${
+          height + (thickness + flapHeight) * 2
+        }`
     }
     return format
   }
@@ -61,7 +64,7 @@ const BoxResults: React.FC<Props> = ({
       4: 'C',
       3: 'B',
     }
-    return mapping[thickn] || ''
+    return mapping[thickness] || ''
   }
 
   return (
@@ -71,9 +74,9 @@ const BoxResults: React.FC<Props> = ({
     >
       <h3 className={styles.heading}>Outer Dimensions</h3>
 
-      <p>Length: {results.length + thickn * 2} mm</p>
-      <p>Width: {results.width + thickn * 2} mm</p>
-      <p>Height: {results.height + thickn * 4} mm</p>
+      <p>Length: {results.length + thickness * 2} mm</p>
+      <p>Width: {results.width + thickness * 2} mm</p>
+      <p>Height: {results.height + thickness * 4} mm</p>
       <br />
       <p>Material: {getMat()}</p>
       <br />

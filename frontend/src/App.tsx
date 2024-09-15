@@ -1,5 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import './App.css'
+import { ThicknessProvider } from './context/ThicknessContext'
+import { FormValidProvider } from './context/FormValidContext'
 import MaterialButtons from './components/MaterialButtons/MaterialButtons' // Adjust the path based on your project structure
 import DimensionsInput from './components/DimensionsInput/DimensionsInput'
 import BoxStyles from './components/BoxStyles/BoxStyles'
@@ -18,7 +20,7 @@ const BoxCrafter: React.FC = () => {
     width: null,
     height: null,
   })
-  const [thickn, setThickn] = useState<number>(5)
+
   const [boxStyle, setBoxStyle] = useState<string>('box')
   const [formValid, setFormValid] = useState<boolean>(false)
 
@@ -37,40 +39,31 @@ const BoxCrafter: React.FC = () => {
     setFormValid(data.formValid)
   }
 
-  const handleThicknChange = (t: number) => {
-    setThickn(t)
-  }
-
   const updateSelectedOption = (option: string) => {
     setBoxStyle(option)
   }
 
   return (
-    <div className='container'>
-      <h2>Box Crafter</h2>
-      {/* <p>Converting Box Dimensions into a DXF Design</p> */}
-      <div className='flex center selfcenter'>
-        <div className='flex-col'>
-          <MaterialButtons onThicknChanged={handleThicknChange} />
-          <DimensionsInput onInputsChanged={handleInputsChange} />
+    <ThicknessProvider>
+      <FormValidProvider>
+        <div className='container'>
+          <h2>Box Crafter</h2>
+          {/* <p>Converting Box Dimensions into a DXF Design</p> */}
+          <div className='flex center selfcenter'>
+            <div className='flex-col'>
+              {/* <MaterialButtons onThicknChanged={handleThicknChange} /> */}
+              <MaterialButtons />
+              <DimensionsInput />
+            </div>
+            <BoxStyles onOptionSelected={updateSelectedOption} />
+          </div>
+
+          <DownloadBtn results={processedInputs} boxStyle={boxStyle} />
+
+          <BoxResults results={processedInputs} boxStyle={boxStyle} />
         </div>
-        <BoxStyles onOptionSelected={updateSelectedOption} />
-      </div>
-
-      <DownloadBtn
-        results={processedInputs}
-        thickn={thickn}
-        boxStyle={boxStyle}
-        formValid={formValid}
-      />
-
-      <BoxResults
-        results={processedInputs}
-        thickn={thickn}
-        boxStyle={boxStyle}
-        formValid={formValid}
-      />
-    </div>
+      </FormValidProvider>
+    </ThicknessProvider>
   )
 }
 
