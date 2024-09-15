@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './BoxStyles.module.css'
 import boxImage from '../../assets/images/box.jpg'
 import boxOpenImage from '../../assets/images/box-open.jpg'
 import halfImage from '../../assets/images/half.jpg'
 import halfOpenImage from '../../assets/images/half-open.jpg'
 // import boxQImage from '../../assets/images/box-q.jpg'
+import { useBoxStyle } from '../../context/BoxStyleContext'
 
 interface Option {
   label: string
@@ -17,12 +18,8 @@ interface Options {
   [key: string]: Option
 }
 
-interface Props {
-  onOptionSelected: (option: string) => void
-}
-
-const BoxStyles: React.FC<Props> = ({ onOptionSelected }) => {
-  const [selectedOption, setSelectedOption] = useState<string>('box')
+const BoxStyles: React.FC = () => {
+  const { boxStyle, setBoxStyle } = useBoxStyle() // Use the BoxStyle context
 
   const options: Options = {
     box: {
@@ -49,28 +46,20 @@ const BoxStyles: React.FC<Props> = ({ onOptionSelected }) => {
       image: halfOpenImage,
       alt: 'half-open',
     },
-    // 'box-q': {
-    //   label: 'Testing Box-Q',
-    //   fefcoCode: '0200',
-    //   image: boxQImage,
-    //   alt: 'box-q',
-    // },
   }
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selected = event.target.value
-    setSelectedOption(selected)
-    onOptionSelected(selected)
+    setBoxStyle(event.target.value) // Update the box style in the context
   }
 
-  const { label, fefcoCode, image, alt } = options[selectedOption]
+  const { label, fefcoCode, image, alt } = options[boxStyle]
 
   return (
     <div className={styles.boxStylesSection}>
       <h3 className={styles.heading}>Box Style</h3>
 
       <select
-        value={selectedOption}
+        value={boxStyle}
         onChange={handleOptionChange}
         className={styles.customSelect}
       >
@@ -81,7 +70,7 @@ const BoxStyles: React.FC<Props> = ({ onOptionSelected }) => {
         ))}
       </select>
 
-      {selectedOption && (
+      {boxStyle && (
         <div>
           <p>{label}</p>
           <p className={styles.paragraph}>

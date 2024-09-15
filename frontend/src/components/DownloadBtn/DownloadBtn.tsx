@@ -1,42 +1,39 @@
 import React, { useState } from 'react'
 import styles from './DownloadBtn.module.css'
+import { useDimensions } from '../..//context/DimensionsContext'
 import { useThickness } from '../../context/ThicknessContext'
 import { useFormValid } from '../../context/FormValidContext'
-import { downloadFile as downloadFileService } from '../../services/downloadFile'
+import { useBoxStyle } from '../../context/BoxStyleContext'
+import { downloadFile } from '../../services/downloadFile'
 
-interface Props {
-  results: {
-    length: number
-    width: number
-    height: number
-  }
-  boxStyle: string
-}
-
-const DownloadBtn: React.FC<Props> = ({ results, boxStyle }) => {
+const DownloadBtn: React.FC = () => {
   const { thickness } = useThickness()
+  const { boxStyle } = useBoxStyle()
   const { formValid } = useFormValid()
+  const { dimensions } = useDimensions() // Use dimensions context
   const [errorMessage, setErrorMessage] = useState<string>('')
 
-  const downloadFile = async () => {
+  const handleDownload = async () => {
     if (!formValid) {
-      setErrorMessage('Please Fill All Dimensions!')
+      setErrorMessage('Please fill all dimensions correctly!')
       return
     }
+
     try {
-      await downloadFileService(results, thickness, boxStyle)
+      await downloadFile(dimensions, thickness, boxStyle)
     } catch (err) {
-      console.error('Error downloading file:', err)
+      setErrorMessage('Error downloading the file. Please try again later.')
+      console.error('Download error:', err)
     }
   }
 
   return (
     <div className={`${styles.downloadSection} flex-col`}>
-      {/* Error message */}
-      {!formValid && <p className='error-message'>{errorMessage}</p>}
+      {errorMessage && <p className='error-message'>{errorMessage}</p>}
       <button
         className={`${styles.btnPrimary} ${formValid ? styles.ready : ''}`}
-        onClick={downloadFile}
+        onClick={handleDownload}
+        disabled={!formValid} // Disable the button if form is not valid
       >
         Download
       </button>

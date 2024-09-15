@@ -1,70 +1,66 @@
 import React from 'react'
-import styles from './BoxResults.module.css'
+import { useDimensions } from '../../context/DimensionsContext'
+import { useBoxStyle } from '../../context/BoxStyleContext'
 import { useThickness } from '../../context/ThicknessContext'
 import { useFormValid } from '../../context/FormValidContext'
+import styles from './BoxResults.module.css'
 
-interface Props {
-  results: {
-    length: number
-    width: number
-    height: number
-  }
-  thickn: number
-  boxStyle: string
-}
-
-const BoxResults: React.FC<Props> = ({ results, boxStyle }) => {
-  const { thickness } = useThickness()
+const BoxResults: React.FC = () => {
+  const { dimensions } = useDimensions() // Retrieve dimensions from context
+  const { thickness: thickn } = useThickness() // Retrieve thickness from context
+  const { boxStyle } = useBoxStyle() // Retrieve thickness from context
   const { formValid } = useFormValid()
 
-  const calculateFormat = () => {
-    const { length, width, height } = results
+  const { length, width, height } = dimensions
 
-    // Calculate flap height based on material thickness
-    let flapHeight
-    if (thickness === 5) {
-      flapHeight = width / 2 + 4
-    } else if (thickness === 4) {
-      flapHeight = width / 2 + 2
+  // Helper function to calculate flap height based on material thickness
+  const calculateFlapHeight = (): number => {
+    if (thickn === 5) {
+      return width / 2 + 4
+    } else if (thickn === 4) {
+      return width / 2 + 2
     } else {
-      flapHeight = width / 2 + 1
+      return width / 2 + 1
     }
+  }
+  // Blank Size Format Calculation based on Box Style and Thickness
+  // +38 = 40 for glueFlap and -2 from length at the end
+  const calculateFormat = (): string => {
+    const flapHeight = calculateFlapHeight()
+    const boxLength = length + width + thickn * 2 // Box length calculation
 
-    // Blank Size Format Calculation based on Box Style and Thicknessess
-    // +38 = 40 for glueFlap and -2 from length at the end
-    const boxLength = length + width + thickness * 2
     let format: string
     switch (boxStyle) {
       case 'box':
-        format = `${boxLength * 2 + 38} x ${
-          height + (thickness + flapHeight) * 2
-        }`
+        format = `${boxLength * 2 + 38} x ${height + (thickn + flapHeight) * 2}`
         break
       case 'box-open':
-        format = `${boxLength * 2 + 38} x ${height + thickness + flapHeight}`
+        format = `${boxLength * 2 + 38} x ${height + thickn + flapHeight}`
         break
       case 'half':
-        format = `${boxLength + 40} x ${height + (thickness + flapHeight) * 2}`
+        format = `${boxLength + 40} x ${height + (thickn + flapHeight) * 2}`
         break
       case 'half-open':
-        format = `${boxLength + 40} x ${height + thickness + flapHeight}`
+        format = `${boxLength + 40} x ${height + thickn + flapHeight}`
         break
       default:
-        format = `${boxLength * 2 + 38} x ${
-          height + (thickness + flapHeight) * 2
-        }`
+        format = `${boxLength * 2 + 38} x ${height + (thickn + flapHeight) * 2}`
     }
     return format
   }
 
-  // Get Material Function
-  const getMat = () => {
-    const mapping: { [key: number]: string } = {
-      5: 'BC',
-      4: 'C',
-      3: 'B',
+  // Dummy function for material - This should return a string based on thickness
+  const getMat = (): string => {
+    switch (thickn) {
+      case 5:
+        return 'BC'
+      case 4:
+        return 'C'
+      case 3:
+        return 'B'
+      default:
+        return 'Unknown'
     }
-    return mapping[thickness] || ''
   }
 
   return (
@@ -74,9 +70,9 @@ const BoxResults: React.FC<Props> = ({ results, boxStyle }) => {
     >
       <h3 className={styles.heading}>Outer Dimensions</h3>
 
-      <p>Length: {results.length + thickness * 2} mm</p>
-      <p>Width: {results.width + thickness * 2} mm</p>
-      <p>Height: {results.height + thickness * 4} mm</p>
+      <p>Length: {length + thickn * 2} mm</p>
+      <p>Width: {width + thickn * 2} mm</p>
+      <p>Height: {height + thickn * 4} mm</p>
       <br />
       <p>Material: {getMat()}</p>
       <br />

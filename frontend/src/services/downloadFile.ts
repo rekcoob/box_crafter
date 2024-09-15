@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-interface Results {
+interface Dimensions {
   length: number
   width: number
   height: number
 }
 
 export async function downloadFile(
-  results: Results,
+  dimensions: Dimensions,
   thickn: number,
   boxStyle: string
 ): Promise<void> {
@@ -17,11 +17,21 @@ export async function downloadFile(
     3: 'B',
   }
 
+  // Destructure dimensions and reassign length/width if necessary
+  let { length, width } = dimensions
+  const { height } = dimensions // Use const for height as it is not reassigned
+
+  if (width > length) {
+    ;[length, width] = [width, length]
+  }
+
   const boxName = boxStyle === 'box' || boxStyle === 'box-open' ? 'Box' : 'Half'
   const fefcoCode = boxStyle === 'box' || boxStyle === 'half' ? '0201' : '0200'
-  const filename = `${boxName}_${fefcoCode}_${results.length}x${
-    results.width
-  }x${results.height}_${thicknessMap[thickn] || 'output'}.dxf`
+  const filename = `${boxName}_${fefcoCode}_${length}x${width}x${height}_${
+    thicknessMap[thickn] || 'output'
+  }.dxf`
+
+  // const apiUrl = `${process.env.REACT_APP_API_URL}/dxf/${boxStyle}`
 
   let apiUrl: string
   if (import.meta.env.MODE === 'production') {
@@ -30,18 +40,48 @@ export async function downloadFile(
     apiUrl = `http://localhost:5000/dxf/${boxStyle}`
   }
 
+  //   try {
+  //     const response = await axios.post(
+  //       apiUrl,
+  //       {
+  //         length,
+  //         width,
+  //         height,
+  //         thickness: thickn,
+  //       },
+  //       { responseType: 'blob' }
+  //     )
+
+  //     // Trigger file download
+  //     triggerFileDownload(response.data, filename)
+
+  //   } catch {
+  //     throw new Error('Failed to download file. Please try again.')
+  //   }
+  // }
+
+  // // Utility function to handle file download
+  // function triggerFileDownload(blobData: Blob, filename: string) {
+  //   const url = window.URL.createObjectURL(new Blob([blobData]))
+  //   const link = document.createElement('a')
+  //   link.href = url
+  //   link.setAttribute('download', filename)
+  //   document.body.appendChild(link)
+  //   link.click()
+  //   document.body.removeChild(link)
+  //   window.URL.revokeObjectURL(url)
+  // }
+
   try {
     const response = await axios.post(
       apiUrl,
       {
-        l: results.length,
-        w: results.width,
-        h: results.height,
-        t: thickn,
+        length,
+        width,
+        height,
+        thickness: thickn,
       },
-      {
-        responseType: 'blob',
-      }
+      { responseType: 'blob' }
     )
 
     const url = window.URL.createObjectURL(new Blob([response.data]))
@@ -50,8 +90,6 @@ export async function downloadFile(
     link.setAttribute('download', filename)
     document.body.appendChild(link)
     link.click()
-
-    // Clean up the URL object and the link element
     window.URL.revokeObjectURL(url)
     document.body.removeChild(link)
   } catch (error) {

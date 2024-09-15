@@ -1,43 +1,44 @@
-import React, { useState, useEffect } from 'react'
+import React, { ChangeEvent } from 'react'
 import styles from './DimensionsInput.module.css'
+import { useFormValid } from '../../context/FormValidContext'
+import { useDimensions } from '../../context/DimensionsContext'
 
-interface Inputs {
-  length: number | null
-  width: number | null
-  height: number | null
-}
+const DimensionsInput: React.FC = () => {
+  const { dimensions, setDimensions } = useDimensions()
+  const { setFormValid } = useFormValid()
 
-// interface Props {
-//   onInputsChanged: (data: { inputs: Inputs; formValid: boolean }) => void
-// }
-interface Props {
-  onInputsChanged: (inputs: { inputs: Inputs; formValid: boolean }) => void
-}
+  // Function to validate the form
+  const validateForm = (dimensions: {
+    length: number | null
+    width: number | null
+    height: number | null
+  }) => {
+    const { length, width, height } = dimensions
+    const isValid =
+      length !== null &&
+      width !== null &&
+      height !== null &&
+      length > 0 &&
+      width > 0 &&
+      height > 0
 
-const DimensionsInput: React.FC<Props> = ({ onInputsChanged }) => {
-  const [inputs, setInputs] = useState<Inputs>({
-    length: null,
-    width: null,
-    height: null,
-  })
-  const [formValid, setFormValid] = useState<boolean>(false)
+    setFormValid(isValid) // Update form validation state
+  }
 
-  useEffect(() => {
-    // Validate form when any of the inputs change
-    const isFormValid =
-      inputs.length !== null && inputs.width !== null && inputs.height !== null
-    setFormValid(isFormValid)
-
-    // Emit inputs and form validity to the parent
-    onInputsChanged({ inputs, formValid: isFormValid })
-  }, [inputs, onInputsChanged])
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Handle input change for the dimensions
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setInputs((prevInputs) => ({
-      ...prevInputs,
-      [name]: value ? parseFloat(value) : null,
-    }))
+    const numericValue = value ? Number(value) : null // Convert input value to number or null
+
+    // Update the dimensions in the context
+    const updatedDimensions = {
+      ...dimensions,
+      [name]: numericValue,
+    }
+    setDimensions(updatedDimensions)
+
+    // Validate form after updating dimensions
+    validateForm(updatedDimensions)
   }
 
   return (
@@ -48,7 +49,7 @@ const DimensionsInput: React.FC<Props> = ({ onInputsChanged }) => {
           <input
             name='length'
             type='number'
-            value={inputs.length ?? ''}
+            value={dimensions.length ?? ''} // Use empty string if null
             onChange={handleInputChange}
             placeholder='Length'
             required
@@ -56,7 +57,7 @@ const DimensionsInput: React.FC<Props> = ({ onInputsChanged }) => {
           <input
             name='width'
             type='number'
-            value={inputs.width ?? ''}
+            value={dimensions.width ?? ''} // Use empty string if null
             onChange={handleInputChange}
             placeholder='Width'
             required
@@ -64,7 +65,7 @@ const DimensionsInput: React.FC<Props> = ({ onInputsChanged }) => {
           <input
             name='height'
             type='number'
-            value={inputs.height ?? ''}
+            value={dimensions.height ?? ''} // Use empty string if null
             onChange={handleInputChange}
             placeholder='Height'
             required
@@ -74,5 +75,4 @@ const DimensionsInput: React.FC<Props> = ({ onInputsChanged }) => {
     </div>
   )
 }
-
 export default DimensionsInput
