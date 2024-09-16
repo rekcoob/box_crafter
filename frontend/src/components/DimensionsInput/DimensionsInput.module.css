@@ -9,15 +9,15 @@ input[type='number'] {
   padding: 12px 20px;
   margin: 6px 0;
   box-sizing: border-box;
-  border: 1px solid #0062cc;
+  border: 1px solid var(--primary-color);
   -webkit-transition: 0.5s;
   transition: 0.5s;
   border-radius: 0.25rem;
   /* outline: none; */
 }
 input[type='number']:focus {
-  border: 1px solid #0062cc;
-  box-shadow: 0 0 20px #0062cc;
+  border: 1px solid var(--primary-color);
+  box-shadow: 0 0 20px var(--primary-color);
 }
 input[type='number']:disabled {
   border: 1px solid grey;

@@ -27,7 +27,6 @@ body {
 
 /* Light theme overrides */
 body[data-theme='light'] {
-  --primary-color: #1e84ff; /* Modify primary color for light theme if needed */
   --secondary-color: #0056b3; /* Modify secondary color for light theme */
   --dark-color: #ffffff;
   --black-color: #000000;
@@ -38,7 +37,6 @@ body[data-theme='light'] {
 
 /* Dark theme overrides */
 body[data-theme='dark'] {
-  --primary-color: #1e84ff;
   --secondary-color: #0056b3;
   --dark-color: #121212;
   --black-color: #000000;
@@ -50,6 +48,7 @@ body[data-theme='dark'] {
 .primary {
   color: var(--primary-color);
 }
+
 a {
   text-decoration: none;
   color: var(--text-color);

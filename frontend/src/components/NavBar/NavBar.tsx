@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './NavBar.module.css'
 import { useTheme } from '../../context/ThemeContext'
 
 const NavBar: React.FC = () => {
@@ -6,7 +7,7 @@ const NavBar: React.FC = () => {
 
   return (
     <nav className='navbar'>
-      <h1>Box Crafter</h1>
+      <h1 className={styles.heading}>Box Crafter</h1>
       <button onClick={toggleTheme} className='theme-toggle-btn'>
         {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
       </button>

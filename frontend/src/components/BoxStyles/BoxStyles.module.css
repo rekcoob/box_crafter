@@ -20,12 +20,12 @@
   line-height: 1.5;
   color: inherit;
   background-color: inherit;
-  border: 1px solid #1e84ff;
+  border: 1px solid var(--primary-color);
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .customSelect:focus {
-  border-color: #1e84ff;
+  border-color: var(--primary-color);
   outline: 1;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
