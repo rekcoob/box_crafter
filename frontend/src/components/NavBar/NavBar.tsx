@@ -7,7 +7,9 @@ const NavBar: React.FC = () => {
 
   return (
     <nav className='navbar'>
-      <h1 className={styles.heading}>Box Crafter</h1>
+      <h1 data-testid='cypress-tittle' className={styles.heading}>
+        Box Crafter
+      </h1>
       <button onClick={toggleTheme} className='theme-toggle-btn'>
         {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
       </button>

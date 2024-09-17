@@ -1,10 +1,10 @@
 import styles from './MaterialButtons.module.css'
 import { useThickness } from '../../context/ThicknessContext'
-import { useColor } from '../../context/ColorContext'
+// import { useColor } from '../../context/ColorContext'
 
 const MaterialButtons: React.FC = () => {
   const { thickness, setThickness } = useThickness()
-  const { setColor } = useColor()
+  // const { setColor } = useColor()
 
   const materials = [
     { label: 'B', materialThickness: 3, color: 'orange' },
@@ -14,7 +14,7 @@ const MaterialButtons: React.FC = () => {
 
   const handleMaterialChange = (materialThickness: number, color: string) => {
     setThickness(materialThickness)
-    setColor(color) // Update the global primary color
+    // setColor(color) // Update the global primary color
     document.documentElement.style.setProperty('--primary-color', color)
   }
 
@@ -24,6 +24,7 @@ const MaterialButtons: React.FC = () => {
       <div>
         {materials.map(({ label, materialThickness, color }) => (
           <button
+            data-testid={`btn ${materialThickness}`}
             key={materialThickness}
             className={`${styles.btnPrimary} ${
               thickness === materialThickness ? styles.active : ''
