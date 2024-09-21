@@ -20,19 +20,16 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  // Initialize theme state with a value from LocalStorage or default to 'light'
   const [theme, setTheme] = useState<Theme>(() => {
     const savedTheme = localStorage.getItem('theme')
     return savedTheme ? (savedTheme as Theme) : 'light'
   })
 
-  // Apply the theme to the body and store the theme in LocalStorage
   useEffect(() => {
     document.body.setAttribute('data-theme', theme)
-    localStorage.setItem('theme', theme) // Save theme to LocalStorage
+    localStorage.setItem('theme', theme)
   }, [theme])
 
-  // Toggle between light and dark themes
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
   }

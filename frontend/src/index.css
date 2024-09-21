@@ -18,30 +18,19 @@ body {
   /* Default theme (dark mode) */
   --primary-color: #0056b3;
   --secondary-color: #1e84ff;
-  --dark-color: #181a1b;
-  --black-color: #000;
   --text-color: #e8e6e3;
-  --link-color: #fff;
-  --background-color: var(--dark-color); /* Default to dark background */
+  --background-color: #181a1b;
 }
 
 /* Light theme overrides */
 body[data-theme='light'] {
-  --secondary-color: #0056b3; /* Modify secondary color for light theme */
-  --dark-color: #ffffff;
-  --black-color: #000000;
   --text-color: #000000;
-  --link-color: #1e84ff;
   --background-color: #ffffff; /* Light background color */
 }
 
 /* Dark theme overrides */
 body[data-theme='dark'] {
-  --secondary-color: #0056b3;
-  --dark-color: #121212;
-  --black-color: #000000;
   --text-color: #f5f5f5;
-  --link-color: #f5f5f5;
   --background-color: #121212; /* Dark background color */
 }
 
@@ -49,6 +38,9 @@ body[data-theme='dark'] {
   color: var(--primary-color);
 }
 
+.secondary {
+  color: var(--secondary-color);
+}
 a {
   text-decoration: none;
   color: var(--text-color);

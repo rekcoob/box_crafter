@@ -1,0 +1,35 @@
+.radio-button input {
+  /* Reset some styles to ensure consistency across browsers */
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ccc; /* Default border color */
+  border-radius: 50%;
+  position: relative;
+  outline: none;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.radio-button input:checked {
+  border: 2px solid var(--primary-color); /* Change the border color when checked */
+}
+
+.radio-button input:checked::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--primary-color); /* Checked dot uses primary color */
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.radio-button label {
+  margin-right: 10px;
+  cursor: pointer;
+}

@@ -4,22 +4,24 @@ import { DimensionsProvider } from './DimensionsContext'
 import { BoxStyleProvider } from './BoxStyleContext'
 import { FormValidProvider } from './FormValidContext'
 import { ThemeProvider } from './ThemeContext'
-import { ColorProvider } from './ColorContext'
+import { ColorSchemeProvider } from './ColorSchemeContext'
 
 const ContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
     <ThemeProvider>
-      <ColorProvider>
-        <ThicknessProvider>
-          <DimensionsProvider>
-            <BoxStyleProvider>
-              <FormValidProvider>{children}</FormValidProvider>
-            </BoxStyleProvider>
-          </DimensionsProvider>
-        </ThicknessProvider>
-      </ColorProvider>
+      <ColorSchemeProvider>
+        <ColorSchemeProvider>
+          <ThicknessProvider>
+            <DimensionsProvider>
+              <BoxStyleProvider>
+                <FormValidProvider>{children}</FormValidProvider>
+              </BoxStyleProvider>
+            </DimensionsProvider>
+          </ThicknessProvider>
+        </ColorSchemeProvider>
+      </ColorSchemeProvider>
     </ThemeProvider>
   )
 }
