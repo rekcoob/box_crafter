@@ -1,20 +1,18 @@
 import Drawing from 'dxf-writer'
 
-function generateHalfOpen(l: number, w: number, h: number, t: number): string {
-  // Excess Length = Length + Thickness
+export function generateHalfOpen(
+  l: number,
+  w: number,
+  h: number,
+  t: number
+): string {
   const lt = l + t
-  const lt2 = l + t - 2
-  // Excess Width = Width + Thickness
   const wt = w + t
-  // Flap Height
   const k = t === 5 ? w / 2 + 4 : t === 4 ? w / 2 + 2 : w / 2 + 1
-  // Excess Height = Height + Thickness * 2
   const htk = h + t + k
-  const htk2 = h + 2 * k + t
-  // Slots
   const s = 4
 
-  let d = new Drawing()
+  const d = new Drawing()
 
   // Cut Layer
   d.drawLine(0, htk, 0, 0) // 1vertical-full
@@ -47,5 +45,3 @@ function generateHalfOpen(l: number, w: number, h: number, t: number): string {
 
   return d.toDxfString()
 }
-
-export { generateHalfOpen }

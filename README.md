@@ -1,48 +1,50 @@
-# Box to DXF Converter
+# React + TypeScript + Vite
 
-## Introduction
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-This web application allows users to input the dimensions, thickness, and style of a box and generates a corresponding DXF file. Built with React.js and Node.js, this tool is designed to assist manufacturers, designers, and hobbyists in creating box designs efficiently.
+Currently, two official plugins are available:
 
-## Live Demo
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-Check out the live demo here: [Live Demo](https://bigbox-crafter.onrender.com/)
+## Expanding the ESLint configuration
 
-## Features
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- **User-Friendly Interface**: Simple and intuitive React.js frontend for entering box specifications.
-- **Real-Time Conversion**: Convert your specifications into DXF files instantly.
-- **Downloadable Results**: Users can directly download the generated DXF files from the web interface.
+- Configure the top-level `parserOptions` property like this:
 
-## Technologies
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
 
-- **Frontend**: React.js
-- **Backend**: Node.js
-- **DXF Generation**: [Library/Tool used for DXF generation]
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-## Installation
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
 
-To set up the project locally, follow these steps:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/rekcoob/box_to_dxf
-   cd box_to_dxf
-   ```
-2. Install dependencies:
-
-   ```bash
-   # Install backend dependencies
-   npm install
-
-   # Install frontend dependencies
-   cd frontend
-   npm install
-   ```
-
-3. Run the application:
-
-   ```bash
-   # Run frontend and backend
-   npm run dev
-   ```
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```
