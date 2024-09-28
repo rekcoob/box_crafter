@@ -1,0 +1,73 @@
+name: CI and Deploy to Netlify
+
+on:
+  # Run the workflow when pushing changes to the main branch or creating a pull request
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run Cypress Tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.11.0]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      # Start the development server (e.g., Vite or CRA)
+      - name: Start development server
+        run: npm run dev &
+        env:
+          CI: true
+
+      # Wait for the server to be ready before running Cypress
+      - name: Wait for server to be ready
+        run: npx wait-on http://localhost:5173 # Change this to your server URL and port if different
+
+      - name: Run Cypress Tests
+        run: npm run test
+        env:
+          # Ensure to set the necessary environment variables for Cypress, if any
+          CI: true
+
+  deploy:
+    name: Deploy to Netlify
+    needs: test # Only run this job if the `test` job passes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.11.0'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Deploy to Netlify
+        run: npx netlify deploy --prod --dir=dist
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
