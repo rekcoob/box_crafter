@@ -22,7 +22,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     const savedTheme = localStorage.getItem('theme')
-    return savedTheme ? (savedTheme as Theme) : 'light'
+    return savedTheme ? (savedTheme as Theme) : 'dark'
   })
 
   useEffect(() => {
