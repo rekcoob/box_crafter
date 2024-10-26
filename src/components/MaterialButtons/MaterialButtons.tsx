@@ -1,15 +1,14 @@
 import styles from './MaterialButtons.module.css'
 import { useThickness } from '../../context/ThicknessContext'
-// import { useColor } from '../../context/ColorContext'
 
 const MaterialButtons: React.FC = () => {
   const { thickness, setThickness } = useThickness()
-  // const { setColor } = useColor()
 
   const materials = [
     { label: 'B', materialThickness: 3 },
     { label: 'C', materialThickness: 4 },
     { label: 'BC', materialThickness: 5 },
+    { label: 'AAC', materialThickness: 10 },
   ]
 
   return (

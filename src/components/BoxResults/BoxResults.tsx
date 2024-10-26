@@ -6,9 +6,9 @@ import { useFormValid } from '../../context/FormValidContext'
 import styles from './BoxResults.module.css'
 
 const BoxResults: React.FC = () => {
-  const { dimensions } = useDimensions() // Retrieve dimensions from context
-  const { thickness } = useThickness() // Retrieve thickness from context
-  const { boxStyle } = useBoxStyle() // Retrieve thickness from context
+  const { dimensions } = useDimensions()
+  const { thickness } = useThickness()
+  const { boxStyle } = useBoxStyle()
   const { formValid } = useFormValid()
 
   const { length, width, height } = dimensions
@@ -62,6 +62,8 @@ const BoxResults: React.FC = () => {
         return 'C'
       case 3:
         return 'B'
+      case 10:
+        return 'AAC'
       default:
         return 'Unknown'
     }
@@ -72,14 +74,16 @@ const BoxResults: React.FC = () => {
       className={styles.resultsSection}
       style={{ opacity: formValid ? 1 : 0 }}
     >
-      <h3 className={styles.heading}>Outer Dimensions</h3>
+      <div className=''>
+        <h3 className={styles.heading}>Outer Dimensions</h3>
+        <p>Length: {length + thickness * 2} mm</p>
+        <p>Width: {width + thickness * 2} mm</p>
+        <p>Height: {height + thickness * 4} mm</p>
+      </div>
 
-      <p>Length: {length + thickness * 2} mm</p>
-      <p>Width: {width + thickness * 2} mm</p>
-      <p>Height: {height + thickness * 4} mm</p>
-      <br />
-      <p>Material: {getMat()}</p>
-      <br />
+      <p>
+        <strong>Material: {getMat()}</strong>
+      </p>
       <p>
         <strong>Format: </strong>
         {calculateFormat()} mm

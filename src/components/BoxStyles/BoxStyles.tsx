@@ -1,10 +1,15 @@
 import React from 'react'
 import styles from './BoxStyles.module.css'
-import boxImage from '../../assets/images/box.jpg'
-import boxOpenImage from '../../assets/images/box-open.jpg'
-import halfImage from '../../assets/images/half.jpg'
-import halfOpenImage from '../../assets/images/half-open.jpg'
-// import boxQImage from '../../assets/images/box-q.jpg'
+// import boxImage from '../../assets/images/box.jpg'
+// import boxOpenImage from '../../assets/images/box-open.jpg'
+// import halfImage from '../../assets/images/half.jpg'
+// import halfOpenImage from '../../assets/images/half-open.jpg'
+
+import boxImage from '../../assets/images/box-dark.png'
+import boxOpenImage from '../../assets/images/box-open-dark.png'
+import halfImage from '../../assets/images/half-dark.png'
+import halfOpenImage from '../../assets/images/half-open-dark.png'
+
 import { useBoxStyle } from '../../context/BoxStyleContext'
 
 interface Option {
