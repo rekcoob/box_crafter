@@ -4,12 +4,14 @@ import { useBoxStyle } from '../../context/BoxStyleContext'
 import { useThickness } from '../../context/ThicknessContext'
 import { useFormValid } from '../../context/FormValidContext'
 import styles from './BoxResults.module.css'
+import { useTranslation } from 'react-i18next'
 
 const BoxResults: React.FC = () => {
   const { dimensions } = useDimensions()
   const { thickness } = useThickness()
   const { boxStyle } = useBoxStyle()
   const { formValid } = useFormValid()
+  const { t } = useTranslation()
 
   const { length, width, height } = dimensions
 
@@ -75,17 +77,25 @@ const BoxResults: React.FC = () => {
       style={{ opacity: formValid ? 1 : 0 }}
     >
       <div className=''>
-        <h3 className={styles.heading}>Outer Dimensions</h3>
-        <p>Length: {length + thickness * 2} mm</p>
-        <p>Width: {width + thickness * 2} mm</p>
-        <p>Height: {height + thickness * 4} mm</p>
+        <h3 className={styles.heading}>{t('outerDimensions')}</h3>
+        <p>
+          {t('length')}: {length + thickness * 2} mm
+        </p>
+        <p>
+          {t('width')}: {width + thickness * 2} mm
+        </p>
+        <p>
+          {t('height')}: {height + thickness * 4} mm
+        </p>
       </div>
 
       <p>
-        <strong>Material: {getMat()}</strong>
+        <strong>
+          {t('material')}: {getMat()}
+        </strong>
       </p>
       <p>
-        <strong>Format: </strong>
+        <strong>{t('format')}: </strong>
         {calculateFormat()} mm
       </p>
     </div>

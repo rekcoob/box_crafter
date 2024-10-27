@@ -1,8 +1,10 @@
 import styles from './MaterialButtons.module.css'
 import { useThickness } from '../../context/ThicknessContext'
+import { useTranslation } from 'react-i18next'
 
 const MaterialButtons: React.FC = () => {
   const { thickness, setThickness } = useThickness()
+  const { t } = useTranslation()
 
   const materials = [
     { label: 'B', materialThickness: 3 },
@@ -13,7 +15,7 @@ const MaterialButtons: React.FC = () => {
 
   return (
     <div className={`${styles.materialSection} flex-col center`}>
-      <h3>Material</h3>
+      <h3>{t('material')}</h3>
       <div>
         {materials.map(({ label, materialThickness }) => (
           <button
@@ -29,7 +31,8 @@ const MaterialButtons: React.FC = () => {
         ))}
       </div>
       <p>
-        <b>Thickness:</b> {thickness} mm
+        {/* <b>Thickness:</b> {thickness} mm */}
+        <b>{t('thickness')}:</b> {thickness} mm
       </p>
     </div>
   )

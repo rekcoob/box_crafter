@@ -1,0 +1,60 @@
+/* src/components/ThemeSwitcher/ThemeSwitcher.module.css */
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #333, #666);
+  width: 80px;
+  height: 40px;
+  border-radius: 50px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.5s ease;
+}
+
+.toggleBtn {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: left 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+  position: absolute;
+  font-size: 18px;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.iconSun {
+  left: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.iconMoon {
+  right: 10px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.active {
+  background: linear-gradient(135deg, #ffcf40, #ffc107);
+}
+
+.active .toggleBtn {
+  left: 45px;
+  background-color: #333;
+}
+
+.active .iconSun {
+  opacity: 1;
+}
+
+.active .iconMoon {
+  opacity: 0;
+}

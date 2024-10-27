@@ -5,6 +5,7 @@ import { useThickness } from '../../context/ThicknessContext'
 import { useFormValid } from '../../context/FormValidContext'
 import { useBoxStyle } from '../../context/BoxStyleContext'
 import { downloadFile } from '../../services/downloadFile'
+import { useTranslation } from 'react-i18next'
 
 const DownloadBtn: React.FC = () => {
   const { thickness } = useThickness()
@@ -12,6 +13,7 @@ const DownloadBtn: React.FC = () => {
   const { formValid } = useFormValid()
   const { dimensions } = useDimensions() // Use dimensions context
   const [errorMessage, setErrorMessage] = useState<string>('')
+  const { t } = useTranslation()
 
   const handleDownload = async () => {
     if (!formValid) {
@@ -35,7 +37,7 @@ const DownloadBtn: React.FC = () => {
         onClick={handleDownload}
         disabled={!formValid} // Disable the button if form is not valid
       >
-        Download
+        {t('download')}
       </button>
     </div>
   )

@@ -10,7 +10,14 @@ export function generateBox(
   const lt = l + t
   const lt2 = l + t - 2
   const wt = w + t
-  const k = t === 5 ? w / 2 + 4 : t === 4 ? w / 2 + 2 : w / 2 + 1
+  const k =
+    t === 5
+      ? w / 2 + 4
+      : t === 4
+      ? w / 2 + 2
+      : t === 10
+      ? w / 2 + 10
+      : w / 2 + 1
   const htk = h + t * 2 + k
   const htk2 = h + 2 * (t + k)
   const s = 4

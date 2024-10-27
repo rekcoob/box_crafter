@@ -14,6 +14,7 @@ export async function downloadFile(
     5: 'BC',
     4: 'C',
     3: 'B',
+    10: 'AAC',
   }
 
   if (width > length) {

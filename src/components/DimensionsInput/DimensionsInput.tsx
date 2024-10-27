@@ -2,10 +2,12 @@ import React, { ChangeEvent } from 'react'
 import styles from './DimensionsInput.module.css'
 import { useFormValid } from '../../context/FormValidContext'
 import { useDimensions } from '../../context/DimensionsContext'
+import { useTranslation } from 'react-i18next'
 
 const DimensionsInput: React.FC = () => {
   const { dimensions, setDimensions } = useDimensions()
   const { setFormValid } = useFormValid()
+  const { t } = useTranslation()
 
   // Function to validate the form
   const validateForm = (dimensions: {
@@ -45,14 +47,13 @@ const DimensionsInput: React.FC = () => {
     <div className={styles.dimensionsSection}>
       <form>
         <div className='form-group'>
-          <h3>Inner Dimensions (mm)</h3>
+          <h3>{t('innerDimensions')}</h3>
           <input
             name='length'
             type='number'
-            // value={dimensions.length ?? ''} // Use empty string if null
-            value={dimensions.length === 0 ? '' : dimensions.length} // Conditionally display empty string
+            value={dimensions.length === 0 ? '' : dimensions.length}
             onChange={handleInputChange}
-            placeholder='Length'
+            placeholder={t('length')}
             required
           />
           <input
@@ -60,7 +61,7 @@ const DimensionsInput: React.FC = () => {
             type='number'
             value={dimensions.width === 0 ? '' : dimensions.width}
             onChange={handleInputChange}
-            placeholder='Width'
+            placeholder={t('width')}
             required
           />
           <input
@@ -68,7 +69,7 @@ const DimensionsInput: React.FC = () => {
             type='number'
             value={dimensions.height === 0 ? '' : dimensions.height}
             onChange={handleInputChange}
-            placeholder='Height'
+            placeholder={t('height')}
             required
           />
         </div>

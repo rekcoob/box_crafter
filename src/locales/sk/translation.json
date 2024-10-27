@@ -1,0 +1,21 @@
+{
+  "material": "Materiál",
+  "thickness": "Hrúbka",
+  "innerDimensions": "Vnútorné rozmery (mm)",
+  "outerDimensions": "Vonkajšie rozmery (mm)",
+  "length": "Dĺžka",
+  "width": "Šírka",
+  "height": "Výška",
+  "format": "Formát",
+  "download": "Stiahnuť",
+  "boxStyle": "Typ krabice",
+  "regularSlottedBox": "Krabica s oboma klopami",
+  "halfSlottedBox": "Krabica s jednou klopou",
+  "slottedHalf": "Polovica s oboma klopami",
+  "halfSlottedHalf": "Polovica s jednou klopou",
+  "fefcoCode": "FEFCO kód",
+  "box": "krabica",
+  "box-open": "krabica-otvorena",
+  "half": "polovica",
+  "half-open": "polovica-otvorena"
+}

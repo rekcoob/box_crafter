@@ -6,6 +6,7 @@ import BoxStyles from './components/BoxStyles/BoxStyles'
 import BoxResults from './components/BoxResults/BoxResults'
 import DownloadBtn from './components/DownloadBtn/DownloadBtn'
 import NavBar from './components/NavBar/NavBar'
+import './i18n' // pridaj tento riadok
 
 const BoxCrafter: React.FC = () => {
   return (

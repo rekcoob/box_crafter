@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './BoxStyles.module.css'
-// import boxImage from '../../assets/images/box.jpg'
-// import boxOpenImage from '../../assets/images/box-open.jpg'
-// import halfImage from '../../assets/images/half.jpg'
-// import halfOpenImage from '../../assets/images/half-open.jpg'
+import boxImageLight from '../../assets/images/box-light.jpg'
+import boxOpenImageLight from '../../assets/images/box-open-light.jpg'
+import halfImageLight from '../../assets/images/half-light.jpg'
+import halfOpenImageLight from '../../assets/images/half-open-light.jpg'
 
-import boxImage from '../../assets/images/box-dark.png'
-import boxOpenImage from '../../assets/images/box-open-dark.png'
-import halfImage from '../../assets/images/half-dark.png'
-import halfOpenImage from '../../assets/images/half-open-dark.png'
+import boxImageDark from '../../assets/images/box-dark.png'
+import boxOpenImageDark from '../../assets/images/box-open-dark.png'
+import halfImageDark from '../../assets/images/half-dark.png'
+import halfOpenImageDark from '../../assets/images/half-open-dark.png'
 
 import { useBoxStyle } from '../../context/BoxStyleContext'
+import { useTheme } from '../../context/ThemeContext'
+import { useTranslation } from 'react-i18next'
 
 interface Option {
   label: string
@@ -24,44 +26,83 @@ interface Options {
 }
 
 const BoxStyles: React.FC = () => {
-  const { boxStyle, setBoxStyle } = useBoxStyle() // Use the BoxStyle context
+  const { theme } = useTheme()
+  const { boxStyle, setBoxStyle } = useBoxStyle()
+  const { t } = useTranslation()
+
+  // Define image sets based on theme
+  const images =
+    theme === 'light'
+      ? {
+          box: boxImageLight,
+          'box-open': boxOpenImageLight,
+          half: halfImageLight,
+          'half-open': halfOpenImageLight,
+        }
+      : {
+          box: boxImageDark,
+          'box-open': boxOpenImageDark,
+          half: halfImageDark,
+          'half-open': halfOpenImageDark,
+        }
 
   const options: Options = {
     box: {
-      label: 'Regular Slotted Box',
+      label: t('regularSlottedBox'),
       fefcoCode: '0201',
-      image: boxImage,
-      alt: 'box image',
+      image: images.box,
+      alt: t('boxImageAlt'),
     },
     'box-open': {
-      label: 'Half Slotted Box',
+      label: t('halfSlottedBox'),
       fefcoCode: '0200',
-      image: boxOpenImage,
-      alt: 'box-open',
+      image: images['box-open'],
+      alt: t('boxOpenImageAlt'),
     },
     half: {
-      label: 'Slotted Half',
+      label: t('slottedHalf'),
       fefcoCode: '0201',
-      image: halfImage,
-      alt: 'half',
+      image: images.half,
+      alt: t('halfImageAlt'),
     },
     'half-open': {
-      label: 'Half Slotted Half',
+      label: t('halfSlottedHalf'),
       fefcoCode: '0200',
-      image: halfOpenImage,
-      alt: 'half-open',
+      image: images['half-open'],
+      alt: t('halfOpenImageAlt'),
     },
   }
+
+  // State for controlling the fade transition
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [currentImage, setCurrentImage] = useState(options[boxStyle].image)
+
+  // Trigger transition only on theme change
+  useEffect(() => {
+    setIsTransitioning(true) // Start the fade-out
+
+    const transitionTimeout = setTimeout(() => {
+      setCurrentImage(options[boxStyle].image) // Update the image
+      setIsTransitioning(false) // Fade-in with the new image
+    }, 250) // Match this with the CSS transition time
+
+    return () => clearTimeout(transitionTimeout)
+  }, [theme]) // Only trigger transition when theme changes
+
+  // Update the image immediately when boxStyle changes
+  useEffect(() => {
+    setCurrentImage(options[boxStyle].image)
+  }, [boxStyle]) // No fade effect for boxStyle change
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setBoxStyle(event.target.value) // Update the box style in the context
   }
 
-  const { label, fefcoCode, image, alt } = options[boxStyle]
+  const { label, fefcoCode, alt } = options[boxStyle]
 
   return (
     <div className={styles.boxStylesSection}>
-      <h3 className={styles.heading}>Box Style</h3>
+      <h3 className={styles.heading}>{t('boxStyle')}</h3>
 
       <select
         value={boxStyle}
@@ -70,7 +111,8 @@ const BoxStyles: React.FC = () => {
       >
         {Object.keys(options).map((key) => (
           <option key={key} value={key}>
-            {key.replace('-', ' ')}
+            {/* {key.replace('-', ' ')} */}
+            {t(key)}
           </option>
         ))}
       </select>
@@ -79,9 +121,15 @@ const BoxStyles: React.FC = () => {
         <div>
           <p>{label}</p>
           <p className={styles.paragraph}>
-            <b>FEFCO Code:</b> {fefcoCode}
+            <b>{t('fefcoCode')}:</b> {fefcoCode}
           </p>
-          <img src={image} alt={alt} className={styles.img} />
+          <img
+            src={currentImage}
+            alt={alt}
+            className={`${styles.img} ${
+              isTransitioning ? styles['fade-out'] : ''
+            }`}
+          />
         </div>
       )}
     </div>

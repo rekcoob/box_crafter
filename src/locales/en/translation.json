@@ -1,0 +1,21 @@
+{
+  "material": "Material",
+  "thickness": "Thickness",
+  "innerDimensions": "Inner Dimensions (mm)",
+  "outerDimensions": "Outer Dimensions (mm)",
+  "length": "Length",
+  "width": "Width",
+  "height": "Height",
+  "format": "Format",
+  "download": "Download",
+  "boxStyle": "Box Style",
+  "regularSlottedBox": "Regular Slotted Box",
+  "halfSlottedBox": "Half Slotted Box",
+  "slottedHalf": "Slotted Half",
+  "halfSlottedHalf": "Half Slotted Half",
+  "fefcoCode": "FEFCO Code",
+  "box": "box",
+  "box-open": "box-open",
+  "half": "half",
+  "half-open": "half-open"
+}
