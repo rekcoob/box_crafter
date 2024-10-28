@@ -18,11 +18,13 @@ const BoxResults: React.FC = () => {
   // Helper function to calculate flap height based on material thickness
   const calculateFlapHeight = (): number => {
     if (thickness === 5) {
-      return width / 2 + 4
+      return Math.ceil(width / 2 + 4)
     } else if (thickness === 4) {
-      return width / 2 + 2
+      return Math.ceil(width / 2 + 2)
+    } else if (thickness === 10) {
+      return Math.ceil(width / 2 + 10)
     } else {
-      return width / 2 + 1
+      return Math.ceil(width / 2 + 1)
     }
   }
   // Blank Size Format Calculation based on Box Style and Thickness
@@ -30,16 +32,16 @@ const BoxResults: React.FC = () => {
   const calculateFormat = (): string => {
     const flapHeight = calculateFlapHeight()
     const boxLength = length + width + thickness * 2 // Box length calculation
+    const lengthFactor =
+      thickness === 10 ? boxLength * 2 + 40 : boxLength * 2 + 38
 
     let format: string
     switch (boxStyle) {
       case 'box':
-        format = `${boxLength * 2 + 38} x ${
-          height + (thickness + flapHeight) * 2
-        }`
+        format = `${lengthFactor} x ${height + (thickness + flapHeight) * 2}`
         break
       case 'box-open':
-        format = `${boxLength * 2 + 38} x ${height + thickness + flapHeight}`
+        format = `${lengthFactor} x ${height + thickness + flapHeight}`
         break
       case 'half':
         format = `${boxLength + 40} x ${height + (thickness + flapHeight) * 2}`
