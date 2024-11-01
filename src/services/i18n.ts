@@ -1,8 +1,8 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 
-import enTranslation from './locales/en/translation.json'
-import skTranslation from './locales/sk/translation.json'
+import enTranslation from '../locales/en/translation.json'
+import skTranslation from '../locales/sk/translation.json'
 
 // Získaj jazyk z localStorage, alebo použij predvolený
 const savedLanguage = localStorage.getItem('language') || 'en'

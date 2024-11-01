@@ -1,12 +1,12 @@
 import './App.css'
-import ContextProvider from './context/ContextProvider' // Import the combined ContextProvider
+import ContextProvider from './context/ContextProvider'
 import MaterialButtons from './components/MaterialButtons/MaterialButtons'
 import DimensionsInput from './components/DimensionsInput/DimensionsInput'
 import BoxStyles from './components/BoxStyles/BoxStyles'
 import BoxResults from './components/BoxResults/BoxResults'
 import DownloadBtn from './components/DownloadBtn/DownloadBtn'
 import NavBar from './components/NavBar/NavBar'
-import './i18n' // pridaj tento riadok
+import './services/i18n'
 
 const BoxCrafter: React.FC = () => {
   return (

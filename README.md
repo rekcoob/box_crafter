@@ -1,50 +1,58 @@
-# React + TypeScript + Vite
+# 📦 Box Crafter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Box Crafter** is a React application for designing custom boxes. Users can select dimensions, material type, and box style to generate a DXF file ready for manufacturing.
 
-Currently, two official plugins are available:
+🌐 **Live Demo**: [Box Crafter on Netlify](https://box-crafter.netlify.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<!-- ## Theme Demo
 
-## Expanding the ESLint configuration
+![Screenshot of Box Crafter](./src/assets/) -->
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## ✨ Features
 
-- Configure the top-level `parserOptions` property like this:
+- 🧱 **Material Selection**: Choose between different materials (B, C, BC, AAC) with predefined thicknesses.
+- 📐 **Box Styles**: Choose from standard FEFCO box styles like Regular Slotted Box (Code 0201).
+- 📏 **Dimension Input**: Enter inner dimensions to calculate outer dimensions based on material thickness.
+- 💾 **DXF Export**: Download a DXF file of the unfolded box layout.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🛠 Technologies
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **React** for UI
+- **JavaScript** for calculations
+- **DXF Generator Library** (`dxf-writer`)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🚀 Getting Started
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. **Clone and Install**:
+   ```bash
+   git clone https://github.com/rekcoob/box_crafter.git
+   cd box_crafter
+   npm install
+   ```
+2. **Run Locally**:
+   ```bash
+   npm run dev
+   ```
+   Visit `http://localhost:5173`.
+
+## 🎮 Usage
+
+1. **Select Material & Box Style**.
+2. **Enter Dimensions** (Length, Width, Height).
+3. **Download DXF** for the box layout.
+
+Example: For a BC material with 5 mm thickness and inner dimensions 400x300x200 mm, the outer dimensions are 410x310x220 mm.
+
+## 📂 Project Structure
+
+- `src/components`: UI components like `BoxForm` and `MaterialSelector`.
+- `src/utils`: Functions for dimension calculations and DXF generation.
+
+<!-- ## 🤝 Contributing
+
+1. Fork and clone the repo.
+2. Create a branch, make changes, and open a pull request. -->
+
+## 📄 License
+
+This project is licensed under the MIT License.

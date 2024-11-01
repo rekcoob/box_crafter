@@ -87,7 +87,11 @@ const BoxResults: React.FC = () => {
           {t('width')}: {width + thickness * 2} mm
         </p>
         <p>
-          {t('height')}: {height + thickness * 4} mm
+          {t('height')}:{' '}
+          {['box-open', 'half-open'].includes(boxStyle)
+            ? height + thickness * 2
+            : height + thickness * 4}{' '}
+          mm
         </p>
       </div>
 

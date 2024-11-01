@@ -1,6 +1,6 @@
 import { getDXFGenerator } from '../dxf/dxfFactory'
 import { Dimensions, BoxStyle } from '../types'
-import { downloadBlob } from '../utils/download'
+import { downloadBlob } from './download'
 
 export async function downloadFile(
   dimensions: Dimensions,
