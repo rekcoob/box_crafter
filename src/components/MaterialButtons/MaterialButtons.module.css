@@ -1,6 +1,27 @@
 .materialSection {
   /* margin: 30px 0px; */
 }
+
+.btnPrimary {
+  margin: 10px 2px;
+  padding: 0.5em 1em;
+  border-radius: 0.25em;
+  transition: background-color 0.3s ease;
+
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+.btnPrimary:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px var(--primary-color);
+  opacity: 0.85;
+}
+.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
 /* button {
   margin: 10px 0;
   padding: 0.5em 1em;
@@ -37,28 +58,3 @@
   background-color: #0056b3;
   color: #fff;
 } */
-
-.btnPrimary {
-  margin: 10px 2px;
-  padding: 0.5em 1em;
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 0.25em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  background-color: var(--background-color);
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-}
-.btnPrimary:hover {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 10px var(--primary-color);
-  opacity: 0.9;
-}
-.active {
-  background-color: var(--primary-color);
-  color: #fff;
-}

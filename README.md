@@ -1,8 +1,11 @@
 # 📦 Box Crafter
 
-**Box Crafter** is a React application for designing custom boxes. Users can select dimensions, material type, and box style to generate a DXF file ready for manufacturing.
+**Box Crafter** is a React-based app that allows you to create custom box designs for packaging.
+Users can input product dimensions, select materials and box styles, and then download a DXF file for manufacturing.
 
-🌐 **Live Demo**: [Box Crafter on Netlify](https://box-crafter.netlify.app)
+<!-- ## 🔗 [Live Demo](https://box-crafter.netlify.app) -->
+
+🌐 **Live Demo:** [Box Crafter on Netlify](https://box-crafter.netlify.app)
 
 <!-- ## Theme Demo
 
@@ -10,50 +13,49 @@
 
 ## ✨ Features
 
-<!-- - 🧱 **Material Selection**: Choose between different materials (B, C, BC, AAC) with predefined thicknesses. -->
+- **Material Selection**: Choose between different materials (B, C, BC, AAC) with predefined thicknesses
+- **Dimension Input**: Enter inner dimensions to create dxf file based on material thickness.
+- **Box Styles**: Choose from standard FEFCO box styles like Regular Slotted Box (Code 0201).
+- **DXF Export**: Download a DXF file of the unfolded box layout.
 
-- 📜 **Material Selection**: Choose between different materials (B, C, BC, AAC) with predefined thicknesses.
-- 📐 **Dimension Input**: Enter inner dimensions to create dxf file based on material thickness.
-- 📦 **Box Styles**: Choose from standard FEFCO box styles like Regular Slotted Box (Code 0201).
-- 💾 **DXF Export**: Download a DXF file of the unfolded box layout.
+<!-- ## 🎮 Usage
 
-## 🛠 Technologies
+1. **Enter Dimensions** of product you want to pack Length, Width, Height
+2. **Select Material & Box Style** Add additional thickness
+3. **Choose Box Style**
+4. **Download DXF** -->
+
+<!-- ## 🧬 Tech Stack
 
 - **React** for UI
-- **JavaScript** for calculations
+- **Javascript** for calculations
 - **TypeScript** for Type Safety
-- **DXF Generator Library** (`dxf-writer`)
+- **DXF Generator Library** (`dxf-writer`) -->
 
 ## 🚀 Getting Started
 
-1. **Clone and Install**:
+1. **Clone and Install**
    ```bash
    git clone https://github.com/rekcoob/box_crafter.git
    cd box_crafter
    npm install
    ```
-2. **Run Locally**:
+2. **Run Locally**
    ```bash
    npm run dev
    ```
    Visit `http://localhost:5173`
 
-## 🎮 Usage
-
-1. **Select Material & Box Style**.
-2. **Enter Dimensions** (Length, Width, Height)
-3. **Download DXF** for the box layout
-
-## 📂 Project Structure
+<!-- ## 📂 Project Structure
 
 - `src/components`: UI components like DimensionInput and BoxStyles
-- `src/services`: Functions for dimension calculations and DXF generation
+- `src/services`: Functions for dimension calculations and DXF generation -->
 
 <!-- ## 🤝 Contributing
 
 1. Fork and clone the repo.
 2. Create a branch, make changes, and open a pull request. -->
 
-## 📄 License
+<!-- ## 📄 License
 
-This project is licensed under the MIT License
+This project is licensed under the MIT License -->

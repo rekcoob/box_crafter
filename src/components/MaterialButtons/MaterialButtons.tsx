@@ -15,7 +15,7 @@ const MaterialButtons: React.FC = () => {
 
   return (
     <div className={`${styles.materialSection} flex-col center`}>
-      <h3>{t('material')}</h3>
+      <h3 className={styles.heading}>{t('material')}</h3>
       <div>
         {materials.map(({ label, materialThickness }) => (
           <button
