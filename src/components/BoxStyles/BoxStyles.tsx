@@ -84,7 +84,7 @@ const BoxStyles: React.FC = () => {
     const transitionTimeout = setTimeout(() => {
       setCurrentImage(options[boxStyle].image) // Update the image
       setIsTransitioning(false) // Fade-in with the new image
-    }, 250) // Match this with the CSS transition time
+    }, 0) // Match this with the CSS transition time
 
     return () => clearTimeout(transitionTimeout)
   }, [theme]) // Only trigger transition when theme changes

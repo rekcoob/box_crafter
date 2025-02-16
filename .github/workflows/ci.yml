@@ -45,6 +45,7 @@ jobs:
         env:
           # Ensure to set the necessary environment variables for Cypress, if any
           CI: true
+          VITE_GOOGLE_ANALYTICS_ID: ${{ secrets.GA_MEASUREMENT_ID }} # Tu načítaš hodnotu z GitHub secrets
 
   deploy:
     name: Deploy to Netlify

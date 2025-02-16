@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
-import styles from './DownloadBtn.module.css'
-import { useDimensions } from '../..//context/DimensionsContext'
-import { useThickness } from '../../context/ThicknessContext'
-import { useFormValid } from '../../context/FormValidContext'
-import { useBoxStyle } from '../../context/BoxStyleContext'
-import { downloadFile } from '../../services/downloadFile'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactGA from 'react-ga4'
 
-const DownloadBtn: React.FC = () => {
+import { useDimensions } from '../../context/DimensionsContext'
+import { useThickness } from '../../context/ThicknessContext'
+import { useFormValid } from '../../context/FormValidContext'
+import { useBoxStyle } from '../../context/BoxStyleContext'
+
+import { downloadFile } from '../../services/downloadFile'
+import styles from './DownloadBtn.module.css'
+
+export default function DownloadBtn() {
   const { thickness } = useThickness()
   const { boxStyle } = useBoxStyle()
   const { formValid } = useFormValid()
-  const { dimensions } = useDimensions() // Use dimensions context
+  const { dimensions } = useDimensions()
   const [errorMessage, setErrorMessage] = useState<string>('')
   const { t } = useTranslation()
 
@@ -21,14 +23,13 @@ const DownloadBtn: React.FC = () => {
       setErrorMessage('Please fill all dimensions correctly!')
       return
     }
-
+    // Google Analytics Event Tracking
+    ReactGA.event({
+      category: 'Box Crafter',
+      action: 'Clicked Box_Download DXF Button',
+      label: 'Download_DXF',
+    })
     try {
-      // Google Analytics Event Tracking
-      ReactGA.event({
-        category: 'Box Crafter',
-        action: 'Clicked Box_Download DXF Button',
-        label: 'Download_DXF',
-      })
       await downloadFile(dimensions, thickness, boxStyle)
     } catch (err) {
       setErrorMessage('Error downloading the file. Please try again later.')
@@ -37,17 +38,15 @@ const DownloadBtn: React.FC = () => {
   }
 
   return (
-    <div className={`${styles.downloadSection} flex-col`}>
-      {errorMessage && <p className='error-message'>{errorMessage}</p>}
+    <div className={styles.downloadSection}>
+      {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
       <button
-        className={`${styles.btnPrimary} ${formValid ? styles.ready : ''}`}
+        className={`${styles.downloadButton} ${formValid ? styles.ready : ''}`}
         onClick={handleDownload}
-        disabled={!formValid} // Disable the button if form is not valid
+        disabled={!formValid}
       >
         {t('download')}
       </button>
     </div>
   )
 }
-
-export default DownloadBtn

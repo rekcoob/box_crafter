@@ -14,7 +14,7 @@ body {
   font-size: 18px;
   background-color: var(--background-color); /* Use theme variable */
   color: var(--text-color); /* Use theme variable */
-  transition: background-color 0.3s ease, color 0.3s ease;
+  /* transition: background-color 0.3s ease, color 0.3s ease; */
 }
 
 /* Color Scheme */
@@ -26,17 +26,17 @@ body {
   --background-color: #181a1b;
 }
 
-/* Light theme overrides */
+/* Light theme */
 body[data-theme='light'] {
   --text-color: #000000;
-  --background-color: #ffffff; /* Light background color */
+  --background-color: #ffffff;
   --theme-color: #e0e0e0;
 }
 
-/* Dark theme overrides */
+/* Dark theme */
 body[data-theme='dark'] {
   --text-color: #f5f5f5;
-  --background-color: #121212; /* Dark background color */
+  --background-color: #121212;
   --theme-color: #333;
 }
 
@@ -55,9 +55,9 @@ a {
 ul {
   list-style: none;
 }
-img {
+/* img {
   max-width: 100%;
-}
+} */
 
 /* Css Framework Utils Classes */
 .flex {
@@ -90,4 +90,9 @@ img {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin: 20px 0;
+}
+
+button {
+  cursor: pointer;
+  font-weight: bold;
 }
